@@ -1,7 +1,7 @@
 {
   "schema": "pierre-public-knowledge-v1",
   "mentorId": "pierre",
-  "version": 2,
+  "version": 3,
   "reviewStatus": "editorial-seed",
   "records": [
     {
@@ -912,6 +912,706 @@
       "topic": "linguistic diversity",
       "question": "Why do languages change?",
       "answer": "Languages change through ordinary usage, contact, social history and transmission across generations.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-131",
+      "topic": "French",
+      "question": "How do I say good morning in French?",
+      "answer": "Bonjour is a standard daytime greeting; bon matin is not the usual greeting in metropolitan French.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-132",
+      "topic": "French",
+      "question": "How do I say please in French?",
+      "answer": "Use s'il vous plaît formally or to several people, and s'il te plaît in familiar singular address.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-133",
+      "topic": "French",
+      "question": "How do I say thank you in French?",
+      "answer": "Merci means thank you; merci beaucoup means thank you very much.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-134",
+      "topic": "French",
+      "question": "How do I ask someone's name in French?",
+      "answer": "Comment vous appelez-vous ? is formal; Comment tu t'appelles ? is familiar.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-135",
+      "topic": "French",
+      "question": "How do I say I do not understand in French?",
+      "answer": "Je ne comprends pas means I do not understand; in casual speech ne is often omitted.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-136",
+      "topic": "French",
+      "question": "How do I ask someone to repeat in French?",
+      "answer": "Pouvez-vous répéter, s'il vous plaît ? is a polite formal request.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-137",
+      "topic": "French",
+      "question": "What does je voudrais mean?",
+      "answer": "Je voudrais means I would like; it is useful for polite requests.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-138",
+      "topic": "French",
+      "question": "How do I count one to five in French?",
+      "answer": "Un, deux, trois, quatre, cinq. Listen to authentic audio for pronunciation.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-139",
+      "topic": "French",
+      "question": "How do I say where is the station in French?",
+      "answer": "Où est la gare ? asks where the railway station is.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-140",
+      "topic": "French",
+      "question": "How do I say I am learning French?",
+      "answer": "J'apprends le français means I am learning French.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-141",
+      "topic": "Spanish",
+      "question": "How do I greet someone in Spanish?",
+      "answer": "Hola means hello; buenos días is a common morning greeting.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-142",
+      "topic": "Spanish",
+      "question": "How do I say thank you in Spanish?",
+      "answer": "Gracias means thank you; muchas gracias means thank you very much.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-143",
+      "topic": "Spanish",
+      "question": "How do I ask for help in Spanish?",
+      "answer": "¿Puede ayudarme? is a polite way to ask Can you help me?",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-144",
+      "topic": "Spanish",
+      "question": "How do I introduce my name in Spanish?",
+      "answer": "Me llamo Alex means My name is Alex; substitute your own name.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-145",
+      "topic": "Spanish",
+      "question": "How do I say I do not understand in Spanish?",
+      "answer": "No entiendo means I do not understand.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-146",
+      "topic": "Spanish",
+      "question": "How do I ask for repetition in Spanish?",
+      "answer": "¿Puede repetirlo, por favor? is a polite request to repeat it.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-147",
+      "topic": "Spanish",
+      "question": "What does quisiera mean in Spanish?",
+      "answer": "Quisiera can mean I would like, often used in polite requests.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-148",
+      "topic": "Spanish",
+      "question": "How do I count one to five in Spanish?",
+      "answer": "Uno, dos, tres, cuatro, cinco.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-149",
+      "topic": "Spanish",
+      "question": "How do I ask where the library is in Spanish?",
+      "answer": "¿Dónde está la biblioteca? means Where is the library?",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-150",
+      "topic": "Spanish",
+      "question": "How do I say I am learning Spanish?",
+      "answer": "Estoy aprendiendo español means I am learning Spanish.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-151",
+      "topic": "German",
+      "question": "How do I say hello in German?",
+      "answer": "Hallo is a common informal hello; Guten Tag is a more formal daytime greeting.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-152",
+      "topic": "German",
+      "question": "How do I say thank you in German?",
+      "answer": "Danke means thank you; vielen Dank means many thanks.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-153",
+      "topic": "German",
+      "question": "How do I ask someone's name in German?",
+      "answer": "Wie heißen Sie? is formal; Wie heißt du? is familiar.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-154",
+      "topic": "German",
+      "question": "How do I say I do not understand in German?",
+      "answer": "Ich verstehe nicht means I do not understand.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-155",
+      "topic": "German",
+      "question": "How do I ask for repetition in German?",
+      "answer": "Können Sie das bitte wiederholen? is a polite formal request.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-156",
+      "topic": "German",
+      "question": "How do I say I would like in German?",
+      "answer": "Ich möchte means I would like, followed by the relevant complement.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-157",
+      "topic": "German",
+      "question": "How do I count one to five in German?",
+      "answer": "Eins, zwei, drei, vier, fünf.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-158",
+      "topic": "German",
+      "question": "How do I ask where the train station is in German?",
+      "answer": "Wo ist der Bahnhof? means Where is the train station?",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-159",
+      "topic": "German",
+      "question": "How do I say I am learning German?",
+      "answer": "Ich lerne Deutsch means I am learning German.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-160",
+      "topic": "German",
+      "question": "What does bitte mean in German?",
+      "answer": "Bitte can mean please, you're welcome, or pardon? depending on context.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-161",
+      "topic": "Mandarin Chinese",
+      "question": "How do I say hello in Mandarin?",
+      "answer": "你好 (nǐ hǎo) is a common greeting; usage varies by setting.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-162",
+      "topic": "Mandarin Chinese",
+      "question": "How do I say thank you in Mandarin?",
+      "answer": "谢谢 (xièxie) means thank you.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-163",
+      "topic": "Mandarin Chinese",
+      "question": "How do I ask someone's name in Mandarin?",
+      "answer": "你叫什么名字？(Nǐ jiào shénme míngzi?) asks What is your name?",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-164",
+      "topic": "Mandarin Chinese",
+      "question": "How do I say I do not understand in Mandarin?",
+      "answer": "我不明白 (wǒ bù míngbai) means I do not understand.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-165",
+      "topic": "Mandarin Chinese",
+      "question": "How do I ask someone to repeat in Mandarin?",
+      "answer": "请再说一遍 (qǐng zài shuō yí biàn) means Please say it again.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-166",
+      "topic": "Mandarin Chinese",
+      "question": "How do I say I would like in Mandarin?",
+      "answer": "我想要 (wǒ xiǎng yào) can mean I would like or I want, depending on context.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-167",
+      "topic": "Mandarin Chinese",
+      "question": "How do I count one to five in Mandarin?",
+      "answer": "一、二、三、四、五 (yī, èr, sān, sì, wǔ).",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-168",
+      "topic": "Mandarin Chinese",
+      "question": "How do I ask where the library is in Mandarin?",
+      "answer": "图书馆在哪里？(Túshūguǎn zài nǎlǐ?) means Where is the library?",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-169",
+      "topic": "Mandarin Chinese",
+      "question": "How do I say I am learning Chinese in Mandarin?",
+      "answer": "我在学中文 (wǒ zài xué Zhōngwén) means I am studying Chinese.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-170",
+      "topic": "Mandarin Chinese",
+      "question": "What does 请 mean in Mandarin?",
+      "answer": "请 (qǐng) is often used for please, invite, or request, depending on context.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-171",
+      "topic": "Japanese",
+      "question": "How do I say hello in Japanese?",
+      "answer": "こんにちは (konnichiwa) is a daytime greeting; different greetings fit other situations.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-172",
+      "topic": "Japanese",
+      "question": "How do I say thank you in Japanese?",
+      "answer": "ありがとうございます (arigatō gozaimasu) is a polite thank-you.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-173",
+      "topic": "Japanese",
+      "question": "How do I ask someone's name in Japanese?",
+      "answer": "お名前は何ですか (onamae wa nan desu ka) asks for a name politely, though natural phrasing varies.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-174",
+      "topic": "Japanese",
+      "question": "How do I say I do not understand in Japanese?",
+      "answer": "わかりません (wakarimasen) means I do not understand.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-175",
+      "topic": "Japanese",
+      "question": "How do I ask someone to repeat in Japanese?",
+      "answer": "もう一度お願いします (mō ichido onegai shimasu) asks for one more time, please.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-176",
+      "topic": "Japanese",
+      "question": "How do I say I would like water in Japanese?",
+      "answer": "水をください (mizu o kudasai) means Water, please.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-177",
+      "topic": "Japanese",
+      "question": "How do I count one to five in Japanese?",
+      "answer": "一、二、三、四、五 can be read ichi, ni, san, yon/shi, go in common counting contexts.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-178",
+      "topic": "Japanese",
+      "question": "How do I ask where the station is in Japanese?",
+      "answer": "駅はどこですか (eki wa doko desu ka) means Where is the station?",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-179",
+      "topic": "Japanese",
+      "question": "How do I say I am studying Japanese?",
+      "answer": "日本語を勉強しています (nihongo o benkyō shite imasu) means I am studying Japanese.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-180",
+      "topic": "Japanese",
+      "question": "What does すみません mean?",
+      "answer": "すみません (sumimasen) can mean excuse me, sorry, or be used to get attention.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-181",
+      "topic": "Arabic",
+      "question": "How do I say hello in Arabic?",
+      "answer": "مرحبًا (marḥaban) is a widely understood greeting; everyday greetings vary by region.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-182",
+      "topic": "Arabic",
+      "question": "How do I say thank you in Arabic?",
+      "answer": "شكرًا (shukran) means thank you.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-183",
+      "topic": "Arabic",
+      "question": "How do I ask someone's name in Arabic?",
+      "answer": "ما اسمك؟ (mā ismuka/ismuki?) asks What is your name? with gender-marked forms in Modern Standard Arabic.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-184",
+      "topic": "Arabic",
+      "question": "How do I say I do not understand in Arabic?",
+      "answer": "لا أفهم (lā afham) means I do not understand in Modern Standard Arabic.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-185",
+      "topic": "Arabic",
+      "question": "How do I ask someone to repeat in Arabic?",
+      "answer": "هل يمكنك الإعادة؟ (hal yumkinuka al-iʿāda?) asks Can you repeat? in Modern Standard Arabic.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-186",
+      "topic": "Arabic",
+      "question": "How do I say I would like water in Arabic?",
+      "answer": "أريد ماءً (urīdu māʾan) means I want water in Modern Standard Arabic; polite requests vary by region.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-187",
+      "topic": "Arabic",
+      "question": "How do I count one to five in Arabic?",
+      "answer": "واحد، اثنان، ثلاثة، أربعة، خمسة (wāḥid, ithnān, thalātha, arbaʿa, khamsa).",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-188",
+      "topic": "Arabic",
+      "question": "How do I ask where the library is in Arabic?",
+      "answer": "أين المكتبة؟ (ayna al-maktaba?) means Where is the library? in Modern Standard Arabic.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-189",
+      "topic": "Arabic",
+      "question": "How do I say I am learning Arabic?",
+      "answer": "أنا أتعلم العربية (anā ataʿallam al-ʿarabiyya) means I am learning Arabic.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-190",
+      "topic": "Arabic",
+      "question": "What does من فضلك mean in Arabic?",
+      "answer": "من فضلك (min faḍlik) is a polite please; spoken forms and pronunciation vary.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-191",
+      "topic": "Russian",
+      "question": "How do I say hello in Russian?",
+      "answer": "Здравствуйте (zdravstvuyte) is a polite greeting; привет (privet) is informal.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-192",
+      "topic": "Russian",
+      "question": "How do I say thank you in Russian?",
+      "answer": "Спасибо (spasibo) means thank you.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-193",
+      "topic": "Russian",
+      "question": "How do I ask someone's name in Russian?",
+      "answer": "Как вас зовут? (Kak vas zovut?) is a polite way to ask someone's name.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-194",
+      "topic": "Russian",
+      "question": "How do I say I do not understand in Russian?",
+      "answer": "Я не понимаю (ya ne ponimayu) means I do not understand.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-195",
+      "topic": "Russian",
+      "question": "How do I ask someone to repeat in Russian?",
+      "answer": "Повторите, пожалуйста (povtorite, pozhaluysta) means Please repeat.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-196",
+      "topic": "Russian",
+      "question": "How do I say I would like water in Russian?",
+      "answer": "Я хотел(а) бы воды (ya khotel[a] by vody) means I would like some water; the past-form adjective reflects speaker gender.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-197",
+      "topic": "Russian",
+      "question": "How do I count one to five in Russian?",
+      "answer": "Один, два, три, четыре, пять (odin, dva, tri, chetyre, pyat').",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-198",
+      "topic": "Russian",
+      "question": "How do I ask where the station is in Russian?",
+      "answer": "Где вокзал? (Gde vokzal?) means Where is the railway station?",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-199",
+      "topic": "Russian",
+      "question": "How do I say I am learning Russian?",
+      "answer": "Я учу русский язык (ya uchu russkiy yazyk) means I am learning Russian.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-200",
+      "topic": "Russian",
+      "question": "What does пожалуйста mean in Russian?",
+      "answer": "Пожалуйста (pozhaluysta) can mean please or you're welcome.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-201",
+      "topic": "Cross-language practice",
+      "question": "How do I say thank you in seven languages?",
+      "answer": "French merci; Spanish gracias; German danke; Mandarin 谢谢; Japanese ありがとう; Arabic شكرًا; Russian спасибо. Registers vary.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-202",
+      "topic": "Cross-language practice",
+      "question": "Which of these languages uses a right-to-left script?",
+      "answer": "Arabic is normally written right to left. French, Spanish, German and Russian are left to right; Japanese and Chinese can use multiple layout conventions.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-203",
+      "topic": "Cross-language practice",
+      "question": "Which of these languages uses Cyrillic?",
+      "answer": "Russian uses Cyrillic; the other six language tracks here use different writing systems.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-204",
+      "topic": "Cross-language practice",
+      "question": "Which of these languages uses tones to distinguish words?",
+      "answer": "Standard Mandarin uses lexical tones. All languages use pitch in some way, but not all use lexical tone contrasts.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-205",
+      "topic": "Cross-language practice",
+      "question": "Why should I practice greetings in context?",
+      "answer": "Greeting choices depend on time, relationship and register. Practice choosing a form for a real situation.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-206",
+      "topic": "Cross-language practice",
+      "question": "How can I compare pronouns across languages?",
+      "answer": "Compare person, number, formality and grammatical gender in real sentences, rather than assuming one-to-one translations.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-207",
+      "topic": "Cross-language practice",
+      "question": "Why are literal translations sometimes awkward?",
+      "answer": "Languages differ in idioms, word order, grammatical categories and discourse conventions.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-208",
+      "topic": "Cross-language practice",
+      "question": "How do I build a multilingual phrase notebook?",
+      "answer": "Record the source phrase, target language, natural translation, context, pronunciation reference and a review date.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-209",
+      "topic": "Cross-language practice",
+      "question": "How can I avoid mixing similar languages?",
+      "answer": "Practice each language in clear contexts, compare easily confused forms, and use spaced retrieval rather than avoiding comparisons entirely.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-210",
+      "topic": "Cross-language practice",
+      "question": "What is a useful first multilingual project?",
+      "answer": "Write a short introduction in two languages, check accuracy, record it if you wish, and reflect on different structures.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-211",
+      "topic": "Travel and courtesy",
+      "question": "How do I politely ask for directions abroad?",
+      "answer": "Start with a local greeting and excuse me, then ask a short location question. Confirm the answer rather than assuming.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-212",
+      "topic": "Travel and courtesy",
+      "question": "How can I ask for a slower speaking pace?",
+      "answer": "Learn a polite Could you speak more slowly? phrase in your target language and practice recognizing the reply.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-213",
+      "topic": "Travel and courtesy",
+      "question": "What should I say if I misunderstood someone?",
+      "answer": "Say you did not understand and request repetition or rephrasing; this is a normal communication strategy.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-214",
+      "topic": "Travel and courtesy",
+      "question": "How do I ask about food allergies in another language?",
+      "answer": "Prepare an accurately checked allergy statement and show it in writing; do not rely solely on an unverified automated translation for safety.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-215",
+      "topic": "Travel and courtesy",
+      "question": "How do I request help at a station?",
+      "answer": "Use a greeting, identify the destination and ask which platform or route to use; verify signage and current schedules.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-216",
+      "topic": "Travel and courtesy",
+      "question": "What if I cannot read local signs?",
+      "answer": "Use official multilingual signs or trusted assistance; do not guess at safety-critical instructions.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-217",
+      "topic": "Travel and courtesy",
+      "question": "How do I say excuse me respectfully?",
+      "answer": "Learn the phrase used for attracting attention in the local variety; it may differ from the phrase for apologizing.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-218",
+      "topic": "Travel and courtesy",
+      "question": "How do I handle unfamiliar honorifics?",
+      "answer": "Listen to local norms, start politely, and adapt when invited; avoid assuming a single universal rule.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-219",
+      "topic": "Travel and courtesy",
+      "question": "How can I check that I understood directions?",
+      "answer": "Repeat the key destination or step in your own words and ask for confirmation.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-220",
+      "topic": "Travel and courtesy",
+      "question": "What phrases should a beginner memorize for travel?",
+      "answer": "Greetings, please, thank you, excuse me, I don't understand, where is, and could you repeat are a useful start.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-221",
+      "topic": "Language-learning methods",
+      "question": "How do I practice speaking without a partner?",
+      "answer": "Record a short self-introduction, compare with reliable examples, and try a new version without reading.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-222",
+      "topic": "Language-learning methods",
+      "question": "How do I use a bilingual dictionary well?",
+      "answer": "Check part of speech, sense, register and examples; verify a proposed translation in both directions.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-223",
+      "topic": "Language-learning methods",
+      "question": "How can I test vocabulary recall?",
+      "answer": "Hide the answer, produce the word in a meaningful sentence, and review mistakes later.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-224",
+      "topic": "Language-learning methods",
+      "question": "How do I learn a new alphabet?",
+      "answer": "Study a few characters daily, connect them to sounds and words, and practice both recognition and writing.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-225",
+      "topic": "Language-learning methods",
+      "question": "How do I make listening practice accessible?",
+      "answer": "Offer adjustable pace, replay, captions after the first listen, and a text-based alternative where needed.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-226",
+      "topic": "Language-learning methods",
+      "question": "How should I correct pronunciation?",
+      "answer": "Focus on one meaningful contrast, model it with reliable audio, and avoid treating dialect differences as defects.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-227",
+      "topic": "Language-learning methods",
+      "question": "What is an effective beginner dialogue?",
+      "answer": "A greeting, a simple question, a relevant response and a follow-up provide a useful practice sequence.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-228",
+      "topic": "Language-learning methods",
+      "question": "How do I review grammar without rote memorization alone?",
+      "answer": "Use a short explanation, compare contrasting examples, then produce original sentences in a real context.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-229",
+      "topic": "Language-learning methods",
+      "question": "How can I learn polite and informal forms?",
+      "answer": "Practice two versions of the same interaction, identifying who is speaking and the relationship.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-230",
+      "topic": "Language-learning methods",
+      "question": "How do I know when to advance a lesson?",
+      "answer": "Meet the course's mastery requirement and demonstrate independent understanding through meaningful use, not memorized answers alone.",
       "status": "approved-public-seed"
     }
   ]
