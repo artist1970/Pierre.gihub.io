@@ -4,8 +4,21 @@ const input=document.getElementById("message"), send=document.getElementById("se
 if(!input||!send||!log)return;
 let records=[],status="loading";
 const pendingKey="pierre.unanswered.review.v1";
-function queueUnanswered(question){const cleaned=String(question||"").trim().slice(0,500);if(cleaned.length<8||/(password|api.?key|secret|token|address|phone|email|@|social.security|credit.card|student.id|medical|diagnosis)/i.test(cleaned))return;try{const items=JSON.parse(localStorage.getItem(pendingKey)||"[]");if(!Array.isArray(items))return;const normalized=cleaned.toLocaleLowerCase().normalize("NFKC");if(items.some(x=>String(x.question||"").toLocaleLowerCase().normalize("NFKC")===normalized))return;items.push({schema:"mentor-unanswered-v1",mentorId:"pierre",question:cleaned,status:"pending-local-review",capturedAt:new Date().toISOString()});localStorage.setItem(pendingKey,JSON.stringify(items.slice(-100)))}catch{/* Private mode or quota: skip silently. */}}
-
+function queueUnanswered(question){
+  const cleaned=String(question||"").trim().slice(0,250);
+  // Do not collect free-text questions that may include identifying or sensitive details.
+  if(cleaned.length<8||/(@|https?:|www\\.|\\b(?:password|api.?key|secret|token|address|phone|email|student|child|minor|medical|diagnosis|therapy|health|social.security|credit.card|born|birthday|live at|my name is|my daughter|my son)\\b)/i.test(cleaned))return;
+  try{
+    const now=Date.now(),ttl=7*24*60*60*1000;
+    const raw=JSON.parse(localStorage.getItem(pendingKey)||"[]");
+    if(!Array.isArray(raw))return;
+    const items=raw.filter(x=>x&&x.schema==="mentor-unanswered-v1"&&Number.isFinite(Date.parse(x.capturedAt))&&now-Date.parse(x.capturedAt)<ttl);
+    const normalized=cleaned.toLocaleLowerCase().normalize("NFKC");
+    if(items.some(x=>String(x.question||"").toLocaleLowerCase().normalize("NFKC")===normalized))return;
+    items.push({schema:"mentor-unanswered-v1",mentorId:"pierre",question:cleaned,status:"pending-local-review",capturedAt:new Date(now).toISOString()});
+    localStorage.setItem(pendingKey,JSON.stringify(items.slice(-50)));
+  }catch{/* Private mode or quota: fail closed. */}
+}
 const topics={french:["french","français","bonjour"],spanish:["spanish","español","hola"],german:["german","deutsch"],mandarin:["mandarin","chinese","tones"],japanese:["japanese","hiragana","katakana"],arabic:["arabic","عربي"],russian:["russian","русский"],phonetics:["phonetic","ipa","speech sound"],phonology:["phonology","phoneme"],morphology:["morpholog","morpheme"],syntax:["syntax","word order"],semantics:["semantics","meaning"],pragmatics:["pragmatic","context"],translation:["translate","translation"],dictionary:["dictionary","definition"],thesaurus:["thesaurus","synonym","antonym"],accent:["accent","pronunciation"],listening:["listening","hear"],conversation:["conversation","speaking","speak"],grammar:["grammar"],culture:["culture","custom"],assessment:["assessment","mastery","80%"],writing:["writing","write"],"code-switching":["code switch","bilingual"],etymology:["etymology","origin of word"],"language families":["language family","related languages"],register:["formal","informal","register"],voice:["voice","listen aloud"],privacy:["privacy","save my chat"],identity:["who are you","your name"]};
 const greetings={fr:"Bonjour ! Je suis Pierre. Comment puis-je vous aider ?",es:"¡Hola! Soy Pierre. ¿Qué te gustaría aprender?",de:"Guten Tag! Ich bin Pierre. Was möchten Sie lernen?",zh:"你好！我是皮埃尔。你想学习什么？",ja:"こんにちは！ピエールです。何を学びたいですか？",ar:"مرحباً! أنا بيير. ماذا تود أن تتعلم؟",ru:"Здравствуйте! Я Пьер. Что вы хотите изучить?",en:"Hello! I'm Pierre. We can explore languages, grammar, pronunciation, and the art of communicating."};
 const mentorReferrals=[["Archaemenes",/\\b(principal|headmaster|academy mentor|school principal)\\b/i,"https://artist1970.github.io/Archaemenes.github.io/"],["Eiren",/\\b(poetry|literature|literary|creative writing)\\b/i,"https://artist1970.github.io/Eiren.github.io/"],["Zelle",/\\b(visual art|drawing|painting|bazaar art)\\b/i,"https://artist1970.github.io/Zelle.github.io/"],["Hope",/\\b(housing|community support|food assistance|support resources)\\b/i,"https://artist1970.github.io/Hope.github.io/"],["Aurora",/\\b(meditation|grounding|mindfulness|wellness reflection)\\b/i,"https://artist1970.github.io/AuroraCore.github.io/"],["Moirai",/\\b(music|composition|songwriting|the refrain)\\b/i,"https://artist1970.github.io/Moirai.github.io/"],["NAIB",/\\b(administrator|administrative|delegation|ecosystem navigator)\\b/i,"https://artist1970.github.io/NAIB.github.io/"]];
