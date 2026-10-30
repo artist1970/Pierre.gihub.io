@@ -1,0 +1,17 @@
+{
+  "schema": "vnv-toolbar-normalization-v1",
+  "counts": {
+    "html": 1,
+    "eligible": 1,
+    "already": 0,
+    "changed": 1,
+    "protected": 0,
+    "internal": 0,
+    "fragments": 0,
+    "legacyRemoved": 0,
+    "duplicatesCollapsed": 0
+  },
+  "changed": [
+    "index.html"
+  ]
+}
