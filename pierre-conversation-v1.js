@@ -26,6 +26,7 @@ const mentorReferrals=[["Archaemenes",/\b(principal|headmaster|academy mentor|sc
 const fallback="A useful place to begin is your goal. Which language or linguistic topic are you exploring, and would you prefer an explanation, examples, or a practice exercise?";
 const normalize=s=>String(s||"").toLocaleLowerCase().normalize("NFKC").trim();
 const knowledgeStatus=document.getElementById("pierre-knowledge-status");
+if(window.PierreDictionary)window.PierreDictionary.init(window.PIERRE_PUBLIC_DICTIONARY_URL||"");
 function showKnowledgeStatus(message){if(knowledgeStatus)knowledgeStatus.textContent=message;}
 fetch("knowledge/public-qa.v1.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw Error("index");return r.json()}).then(d=>{
  if(d.schema!=="pierre-public-knowledge-v1"||!Array.isArray(d.records))throw Error("schema");
@@ -62,6 +63,12 @@ if(/\b(what can you do|how can you help|your specialty)\b/.test(s))return "My sp
 if(/\b(thank you|thanks|merci|gracias|danke|спасибо)\b/.test(s))return "My pleasure! Merci à vous. Is there another question I can help with?";
 if(/\b(goodbye|bye|see you later|au revoir)\b/.test(s))return "Au revoir! Come back whenever curiosity calls.";
 const direct=records.find(r=>normalize(r.question)===s);if(direct)return direct.answer;
+const dictionaryRequest=s.match(/^(?:what (?:is|does)|define|definition of|meaning of|synonyms? (?:of|for)|antonyms? (?:of|for))\s+(.+?)[?.!]*$/i);
+if(dictionaryRequest&&window.PierreDictionary){
+ const mode=/^synonyms?/i.test(s)?"synonyms":/^antonyms?/i.test(s)?"antonyms":"definition";
+ const word=dictionaryRequest[1].replace(/^(?:the word|a word)\s+/i,"").trim();
+ if(/^[\p{L}'-]{1,80}$/u.test(word)){const result=window.PierreDictionary.lookup(word,mode);if(result)return result;}
+}
 if(s.includes("thank"))return "You're welcome. Languages reward curiosity and regular practice. What shall we explore next?";
 const tokens=x=>normalize(x).replace(/[^\p{L}\p{N}]+/gu," ").split(/\s+/).filter(w=>w.length>2&&!["the","and","you","your","can","how","what","why","does","are","for","with","should","this","that","about","from","into","have","learn"].includes(w));
 const words=new Set(tokens(s));let best=null,bestScore=0;
