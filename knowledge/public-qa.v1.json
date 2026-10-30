@@ -4,12 +4,6 @@
   "version": 4,
   "reviewStatus": "editorial-seed",
   "records": [
-   {
-  "schema": "pierre-public-knowledge-v1",
-  "mentorId": "pierre",
-  "version": 3,
-  "reviewStatus": "editorial-seed",
-  "records": [
     {
       "id": "pierre-public-001",
       "topic": "identity",
