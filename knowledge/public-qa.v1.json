@@ -1,0 +1,218 @@
+{
+  "schema": "pierre-public-knowledge-v1",
+  "mentorId": "pierre",
+  "version": 1,
+  "reviewStatus": "editorial-seed",
+  "records": [
+    {
+      "id": "pierre-public-001",
+      "topic": "identity",
+      "question": "Who are you?",
+      "answer": "Je suis Pierre, a language-learning and linguistics guide. I can explain language concepts, offer practice, and point toward Academy resources.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-002",
+      "topic": "french",
+      "question": "How do I start French?",
+      "answer": "Begin with the alphabet, sounds, numbers, everyday greetings, and short original sentences. Practise listening and speaking alongside reading.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-003",
+      "topic": "spanish",
+      "question": "How do I start Spanish?",
+      "answer": "Learn common greetings, vowels, stress patterns, useful verbs, and everyday phrases; practice with small original exchanges.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-004",
+      "topic": "german",
+      "question": "How do I learn German word order?",
+      "answer": "Begin with simple main clauses, then compare how verb position changes in questions and subordinate clauses.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-005",
+      "topic": "mandarin",
+      "question": "What are Mandarin tones?",
+      "answer": "Standard Mandarin uses lexical tones. Study tone contour with listening and contextual practice; treat pinyin as a pronunciation aid.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-006",
+      "topic": "japanese",
+      "question": "How do I begin Japanese?",
+      "answer": "Start with hiragana and basic phrases, then katakana and beginner kanji. Compare polite forms and everyday context.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-007",
+      "topic": "arabic",
+      "question": "How do I start Arabic?",
+      "answer": "Learn the script and sound distinctions, then build short phrases. Distinguish Modern Standard Arabic from spoken varieties.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-008",
+      "topic": "russian",
+      "question": "How do I learn Russian?",
+      "answer": "Start with the Cyrillic alphabet, stress and pronunciation, then common phrases and case patterns in context.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-009",
+      "topic": "phonetics",
+      "question": "What is phonetics?",
+      "answer": "Phonetics studies speech sounds: how they are produced, transmitted and perceived. The IPA can help describe them.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-010",
+      "topic": "phonology",
+      "question": "What is phonology?",
+      "answer": "Phonology studies how sound contrasts and patterns function within a particular language.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-011",
+      "topic": "morphology",
+      "question": "What is morphology?",
+      "answer": "Morphology examines meaningful word parts and how words are formed or inflected.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-012",
+      "topic": "syntax",
+      "question": "What is syntax?",
+      "answer": "Syntax studies how words and phrases combine into grammatical structures.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-013",
+      "topic": "semantics",
+      "question": "What is semantics?",
+      "answer": "Semantics studies meaning in words, phrases and sentences.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-014",
+      "topic": "pragmatics",
+      "question": "What is pragmatics?",
+      "answer": "Pragmatics asks how context, speaker intention, and shared knowledge shape what utterances communicate.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-015",
+      "topic": "translation",
+      "question": "Can you translate a sentence?",
+      "answer": "I can suggest a translation and explain context or ambiguity. Share the sentence and your target language; keep private details out.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-016",
+      "topic": "dictionary",
+      "question": "How should I use a dictionary?",
+      "answer": "Check the part of speech, sense, examples, register, inflections and source. Choose the sense that fits your context.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-017",
+      "topic": "thesaurus",
+      "question": "How do I choose synonyms?",
+      "answer": "Compare connotation, register, grammar, collocations and examples. Near-synonyms are rarely interchangeable everywhere.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-018",
+      "topic": "accent",
+      "question": "Is my accent wrong?",
+      "answer": "An accent is not itself an error. Focus on intelligibility and the distinctions that matter in your chosen language variety.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-019",
+      "topic": "listening",
+      "question": "How can I improve listening?",
+      "answer": "Choose short age-appropriate audio, listen for a general meaning, replay for details, then summarize without looking at the transcript.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-020",
+      "topic": "conversation",
+      "question": "How can I practice speaking?",
+      "answer": "Use short original exchanges: greeting, question, response and follow-up. Change roles and repeat with a new detail.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-021",
+      "topic": "grammar",
+      "question": "Why study grammar?",
+      "answer": "Grammar gives you reusable patterns for expressing new meanings. Pair explanations with meaningful sentences and conversation.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-022",
+      "topic": "culture",
+      "question": "How does culture affect language?",
+      "answer": "Language use varies by context, region and community. Ask about register, politeness and local variation without stereotypes.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-023",
+      "topic": "assessment",
+      "question": "How does mastery work?",
+      "answer": "Where Academy courses require it, 80% or higher unlocks the next lesson. Independent communication and teacher-reviewed evidence also matter.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-024",
+      "topic": "writing",
+      "question": "How do I improve foreign-language writing?",
+      "answer": "Draft a short paragraph with familiar structures, check agreement and word order, then revise for clarity and audience.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-025",
+      "topic": "code-switching",
+      "question": "What is code-switching?",
+      "answer": "Code-switching is movement between languages or varieties in discourse. It is a normal multilingual practice shaped by context.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-026",
+      "topic": "etymology",
+      "question": "What is etymology?",
+      "answer": "Etymology traces a word's history and development. Similar-looking words are not always historically related.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-027",
+      "topic": "language families",
+      "question": "Are all languages related?",
+      "answer": "Languages can be grouped by demonstrated historical descent. Not all proposed relationships are established.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-028",
+      "topic": "register",
+      "question": "What is register?",
+      "answer": "Register is language chosen for a situation or audience, such as formal, informal, academic or conversational usage.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-029",
+      "topic": "voice",
+      "question": "Can you pronounce words aloud?",
+      "answer": "When your browser offers compatible speech synthesis, this page can provide an optional voice preview. Voices and accuracy vary by device.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-030",
+      "topic": "privacy",
+      "question": "Do you keep my messages?",
+      "answer": "This page's initial chat runs locally, without uploading or saving messages. Avoid entering personal records or credentials.",
+      "status": "approved-public-seed"
+    }
+  ]
+}
