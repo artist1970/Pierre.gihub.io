@@ -25,7 +25,20 @@ const greetings={fr:"Bonjour ! Je suis Pierre. Comment puis-je vous aider ?",es:
 const mentorReferrals=[["Archaemenes",/\b(principal|headmaster|academy mentor|school principal)\b/i,"https://artist1970.github.io/Archaemenes.github.io/"],["Eiren",/\b(poetry|literature|literary|creative writing)\b/i,"https://artist1970.github.io/Eiren.github.io/"],["Zelle",/\b(visual art|drawing|painting|bazaar art)\b/i,"https://artist1970.github.io/Zelle.github.io/"],["Hope",/\b(housing|community support|food assistance|support resources)\b/i,"https://artist1970.github.io/Hope.github.io/"],["Aurora",/\b(meditation|grounding|mindfulness|wellness reflection)\b/i,"https://artist1970.github.io/AuroraCore.github.io/"],["Moirai",/\b(music|composition|songwriting|the refrain)\b/i,"https://artist1970.github.io/Moirai.github.io/"],["NAIB",/\b(administrator|administrative|delegation|ecosystem navigator)\b/i,"https://artist1970.github.io/NAIB.github.io/"]];
 const fallback="A useful place to begin is your goal. Which language or linguistic topic are you exploring, and would you prefer an explanation, examples, or a practice exercise?";
 const normalize=s=>String(s||"").toLocaleLowerCase().normalize("NFKC").trim();
-fetch("knowledge/public-qa.v1.json").then(r=>{if(!r.ok)throw Error("index");return r.json()}).then(d=>{if(d.schema!=="pierre-public-knowledge-v1"||!Array.isArray(d.records))throw Error("schema");records=d.records.filter(x=>x.status==="approved-public-seed"&&typeof x.answer==="string");status="ready"}).catch(()=>{status="offline-fallback"});
+const knowledgeStatus=document.getElementById("pierre-knowledge-status");
+function showKnowledgeStatus(message){if(knowledgeStatus)knowledgeStatus.textContent=message;}
+fetch("knowledge/public-qa.v1.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw Error("index");return r.json()}).then(d=>{
+ if(d.schema!=="pierre-public-knowledge-v1"||!Array.isArray(d.records))throw Error("schema");
+ const seen=new Set();
+ records=d.records.filter(x=>{
+  if(x.status!=="approved-public-seed"||typeof x.question!=="string"||typeof x.answer!=="string"||!x.answer.trim())return false;
+  const key=normalize(x.question);
+  if(seen.has(key))return false;
+  seen.add(key);return true;
+ });
+ status="ready";
+ showKnowledgeStatus("Pierre's knowledge bank ready: "+records.length+" questions loaded.");
+}).catch(()=>{status="offline-fallback";showKnowledgeStatus("Knowledge bank unavailable; limited offline responses are active.");});
 function answer(raw){const s=normalize(raw).slice(0,1200);if(!s)return "Write a question or select a language above.";
 if(/\b(french|français)\b/i.test(s))activeLanguage="French";
 else if(/\b(spanish|español)\b/i.test(s))activeLanguage="Spanish";
