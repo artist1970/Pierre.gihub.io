@@ -1,7 +1,7 @@
 {
   "schema": "pierre-public-knowledge-v1",
   "mentorId": "pierre",
-  "version": 1,
+  "version": 2,
   "reviewStatus": "editorial-seed",
   "records": [
     {
@@ -212,6 +212,706 @@
       "topic": "privacy",
       "question": "Do you keep my messages?",
       "answer": "This page's initial chat runs locally, without uploading or saving messages. Avoid entering personal records or credentials.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-031",
+      "topic": "conversation",
+      "question": "How are you today?",
+      "answer": "I'm ready to explore languages with you. Thank you for asking! How is your day going?",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-032",
+      "topic": "conversation",
+      "question": "Can we just talk?",
+      "answer": "Certainly. We can talk naturally without turning every exchange into a lesson.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-033",
+      "topic": "conversation",
+      "question": "I am shy about speaking. What helps?",
+      "answer": "Begin with one useful phrase and a friendly partner. Communication matters more than perfection.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-034",
+      "topic": "conversation",
+      "question": "What should I ask you?",
+      "answer": "Ask about a word, sound, language course, translation, or grammar pattern; examples help me respond precisely.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-035",
+      "topic": "conversation",
+      "question": "Can you help me set a goal?",
+      "answer": "Choose one thing you want to understand or say independently, then plan a small daily practice.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-036",
+      "topic": "navigation",
+      "question": "Where is the foreign language department?",
+      "answer": "Visit https://vervenveda.com/Khaemenes_Linguistics.github.io/ for the Academy's Linguistics Hall.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-037",
+      "topic": "navigation",
+      "question": "How do I reach French 101?",
+      "answer": "Open the Linguistics Hall, select French, then choose French 101. Tell me the broken link if you encounter one.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-038",
+      "topic": "navigation",
+      "question": "Who teaches language arts?",
+      "answer": "Eiren is the language arts and literature mentor; I specialize in linguistics and foreign languages.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-039",
+      "topic": "navigation",
+      "question": "Who handles student enrollment?",
+      "answer": "Use the Academy family or student portal. NAIB handles public administrative navigation; this chat cannot enroll students.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-040",
+      "topic": "navigation",
+      "question": "Can you unlock my next lesson?",
+      "answer": "I cannot override course gates. Follow the course's mastery requirements and seek an authorized educator for a genuine access issue.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-041",
+      "topic": "french",
+      "question": "When do I use tu or vous?",
+      "answer": "Tu is generally familiar singular; vous is plural or formal singular. Social expectations vary by setting.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-042",
+      "topic": "french",
+      "question": "Why are some French final letters silent?",
+      "answer": "French spelling reflects historical developments; many final consonants are silent, while liaison and word families reveal exceptions.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-043",
+      "topic": "french",
+      "question": "How do French nasal vowels work?",
+      "answer": "Air passes through mouth and nose during the vowel. Compare bon and banc with reliable audio rather than adding a full final n.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-044",
+      "topic": "french",
+      "question": "When should I say c'est versus il est?",
+      "answer": "C'est often identifies or presents; il est often describes an already identified subject. The following structure matters.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-045",
+      "topic": "french",
+      "question": "How can I introduce myself in French?",
+      "answer": "Try Bonjour, je m'appelle Alex. J'apprends le français. Et vous ? Substitute a name of your choice.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-046",
+      "topic": "spanish",
+      "question": "What distinguishes ser and estar?",
+      "answer": "Ser often identifies or characterizes; estar often locates or describes a state. Permanent versus temporary is an oversimplification.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-047",
+      "topic": "spanish",
+      "question": "When should I use tú or usted?",
+      "answer": "Tú is familiar in many communities; usted often marks respect or distance, with important regional variation.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-048",
+      "topic": "spanish",
+      "question": "What is saber versus conocer?",
+      "answer": "Saber concerns facts or skills; conocer often expresses familiarity with people or places.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-049",
+      "topic": "spanish",
+      "question": "How does Spanish stress work?",
+      "answer": "Learn default stress patterns and how written accent marks signal exceptions or distinguish words.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-050",
+      "topic": "spanish",
+      "question": "How can I practice Spanish questions?",
+      "answer": "Use qué, dónde, cuándo and por qué in short exchanges; answer with a complete original sentence.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-051",
+      "topic": "german",
+      "question": "Why learn German nouns with articles?",
+      "answer": "Articles reveal grammatical gender, which affects case and adjective endings. Learn der, die or das with each noun.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-052",
+      "topic": "german",
+      "question": "What does verb-second mean?",
+      "answer": "In many German main clauses the finite verb follows the first constituent: Heute lerne ich Deutsch.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-053",
+      "topic": "german",
+      "question": "What do German cases express?",
+      "answer": "Nominative, accusative, dative and genitive help mark grammatical relationships; practice them in full phrases.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-054",
+      "topic": "german",
+      "question": "When do I use du or Sie?",
+      "answer": "Du is familiar and Sie formal; local relationships and social expectations guide the choice.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-055",
+      "topic": "german",
+      "question": "How can I read long German compounds?",
+      "answer": "Break them into components and identify the final noun, which often controls the compound's grammatical gender.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-056",
+      "topic": "mandarin",
+      "question": "Why are Mandarin tones important?",
+      "answer": "Lexical tones distinguish words in Standard Mandarin. Listen to tones in connected phrases as well as isolated syllables.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-057",
+      "topic": "mandarin",
+      "question": "What is Hanyu Pinyin?",
+      "answer": "Pinyin is a Latin-letter pronunciation notation for Standard Mandarin; it helps learning but does not replace characters.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-058",
+      "topic": "mandarin",
+      "question": "What are Chinese measure words?",
+      "answer": "Classifiers often occur between numbers and nouns, such as 一本书 for one book.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-059",
+      "topic": "mandarin",
+      "question": "Are simplified and traditional Chinese separate languages?",
+      "answer": "No. They are character standards used in different communities; writing system and spoken language are distinct dimensions.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-060",
+      "topic": "mandarin",
+      "question": "How should I learn Chinese characters?",
+      "answer": "Study frequent characters in meaningful words, notice components, and revisit them through short readings.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-061",
+      "topic": "japanese",
+      "question": "Why does Japanese use three scripts?",
+      "answer": "Hiragana handles many grammatical forms, katakana often marks loanwords, and kanji represents many lexical roots.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-062",
+      "topic": "japanese",
+      "question": "What do Japanese particles mark?",
+      "answer": "Particles such as は, が, を and に express discourse or grammatical relationships; compare them in context.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-063",
+      "topic": "japanese",
+      "question": "What is the polite -masu form?",
+      "answer": "Masu forms are common polite verb forms. Appropriate style depends on the situation and relationship.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-064",
+      "topic": "japanese",
+      "question": "What is a Japanese mora?",
+      "answer": "A mora is a rhythm and timing unit; long vowels and the moraic nasal affect mora count.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-065",
+      "topic": "japanese",
+      "question": "How can I improve Japanese listening?",
+      "answer": "Listen to a brief exchange, summarize it, check a transcript, and replay for rhythm and familiar structures.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-066",
+      "topic": "arabic",
+      "question": "Should I study Modern Standard Arabic or a dialect?",
+      "answer": "Modern Standard Arabic supports formal writing and media; spoken varieties are central to daily conversation. Choose based on goals.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-067",
+      "topic": "arabic",
+      "question": "How does Arabic script work?",
+      "answer": "Arabic runs right to left, and letters often change shape by position; short vowel marks may be omitted in ordinary text.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-068",
+      "topic": "arabic",
+      "question": "What is an Arabic root and pattern?",
+      "answer": "Many words use consonantal roots combined with patterns, although not every word fits a simple template.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-069",
+      "topic": "arabic",
+      "question": "How can I practice Arabic sounds?",
+      "answer": "Compare one sound contrast at a time with trustworthy audio, paying attention to articulation without straining.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-070",
+      "topic": "arabic",
+      "question": "How does Arabic gender affect grammar?",
+      "answer": "Grammatical gender influences agreement in many constructions; learn noun and adjective patterns together.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-071",
+      "topic": "russian",
+      "question": "How can I learn Cyrillic?",
+      "answer": "Study small letter groups and read short words with audio; do not assume look-alike Latin letters have the same sounds.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-072",
+      "topic": "russian",
+      "question": "Why does Russian have cases?",
+      "answer": "Case endings mark relationships such as subject, object, possession and location.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-073",
+      "topic": "russian",
+      "question": "What is Russian verbal aspect?",
+      "answer": "Imperfective and perfective aspects express how events are viewed; they are not merely tense labels.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-074",
+      "topic": "russian",
+      "question": "Why does Russian stress matter?",
+      "answer": "Stress can affect vowel pronunciation and may shift across word forms; learn it alongside vocabulary.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-075",
+      "topic": "russian",
+      "question": "How can I practice Russian conversation?",
+      "answer": "Build a short greeting, question and answer; then vary one detail and review stress.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-076",
+      "topic": "phonetics",
+      "question": "How are letters and sounds different?",
+      "answer": "Letters belong to writing; speech sounds are articulated and perceived. Spellings do not map one-to-one to sounds.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-077",
+      "topic": "phonetics",
+      "question": "What is the IPA?",
+      "answer": "The International Phonetic Alphabet provides symbols for describing speech sounds.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-078",
+      "topic": "phonetics",
+      "question": "What is voicing?",
+      "answer": "Voicing is vocal-fold vibration during articulation; compare /s/ and /z/.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-079",
+      "topic": "phonetics",
+      "question": "What is a minimal pair?",
+      "answer": "Two words differing by one contrasting sound, such as sip and zip, form a minimal pair.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-080",
+      "topic": "phonetics",
+      "question": "How do I learn a difficult consonant?",
+      "answer": "Identify its place and manner of articulation, listen to reliable examples, and practice in meaningful words.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-081",
+      "topic": "phonology",
+      "question": "What is a phoneme?",
+      "answer": "A phoneme is a contrastive sound category within a language.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-082",
+      "topic": "phonology",
+      "question": "What is an allophone?",
+      "answer": "An allophone is a contextual realization of a phoneme that generally does not change word identity.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-083",
+      "topic": "phonology",
+      "question": "What is assimilation?",
+      "answer": "Assimilation occurs when a sound becomes more like a nearby sound in a particular feature.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-084",
+      "topic": "phonology",
+      "question": "What is phonotactics?",
+      "answer": "Phonotactics describes permissible sound sequences and syllable patterns in a language.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-085",
+      "topic": "phonology",
+      "question": "Why do languages use different sounds?",
+      "answer": "Languages organize sound contrasts differently through history and community usage.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-086",
+      "topic": "morphology",
+      "question": "What is a morpheme?",
+      "answer": "A morpheme is a minimal meaningful or grammatical unit; un-happy-ness contains several.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-087",
+      "topic": "morphology",
+      "question": "What is inflection?",
+      "answer": "Inflection marks grammatical properties such as number, tense or case without necessarily creating a new lexeme.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-088",
+      "topic": "morphology",
+      "question": "What is derivation?",
+      "answer": "Derivation often forms a new lexeme or changes meaning or word class.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-089",
+      "topic": "morphology",
+      "question": "What is a compound?",
+      "answer": "A compound combines lexical elements, as in toothbrush; the whole meaning may be specialized.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-090",
+      "topic": "morphology",
+      "question": "How do I analyze a new word?",
+      "answer": "Inspect its context, possible stem and affixes, then verify your hypothesis with a dictionary.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-091",
+      "topic": "syntax",
+      "question": "What is a constituent?",
+      "answer": "A constituent is a group of words functioning as a unit within a larger structure.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-092",
+      "topic": "syntax",
+      "question": "What does SVO mean?",
+      "answer": "SVO is subject-verb-object order, a common basic sentence pattern in some languages.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-093",
+      "topic": "syntax",
+      "question": "What is grammatical agreement?",
+      "answer": "Agreement occurs when one form reflects features of another, such as subject-verb number.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-094",
+      "topic": "syntax",
+      "question": "What is a subordinate clause?",
+      "answer": "A subordinate clause is embedded in a larger structure, as in because it rained.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-095",
+      "topic": "syntax",
+      "question": "How can I compare word order?",
+      "answer": "Use equivalent short sentences, label grammatical roles, and compare questions and embedded clauses.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-096",
+      "topic": "semantics",
+      "question": "What is polysemy?",
+      "answer": "Polysemy means one word form has multiple related senses, as with head of a person and head of a department.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-097",
+      "topic": "semantics",
+      "question": "What is lexical ambiguity?",
+      "answer": "Lexical ambiguity occurs when a word or expression allows more than one interpretation.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-098",
+      "topic": "semantics",
+      "question": "What is entailment?",
+      "answer": "A sentence entails another when the second must be true if the first is true under the relevant reading.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-099",
+      "topic": "semantics",
+      "question": "What is a semantic field?",
+      "answer": "A semantic field groups related meanings, such as kinship or movement vocabulary.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-100",
+      "topic": "semantics",
+      "question": "How does context select meaning?",
+      "answer": "Context helps identify the relevant sense; bank can refer to money or a river edge.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-101",
+      "topic": "pragmatics",
+      "question": "What is implicature?",
+      "answer": "An implicature is meaning suggested by context rather than explicitly stated.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-102",
+      "topic": "pragmatics",
+      "question": "What is a speech act?",
+      "answer": "A speech act performs an action through language, such as requesting, promising or apologizing.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-103",
+      "topic": "pragmatics",
+      "question": "Why does politeness differ across cultures?",
+      "answer": "Communities differ in norms of directness and address; context matters more than a universal rule.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-104",
+      "topic": "pragmatics",
+      "question": "What is deixis?",
+      "answer": "Words such as here, tomorrow and I depend on the speaker, place or time.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-105",
+      "topic": "pragmatics",
+      "question": "How do I make a polite request?",
+      "answer": "Learn a natural request pattern for the relevant community instead of translating English word for word.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-106",
+      "topic": "translation",
+      "question": "What makes a translation accurate?",
+      "answer": "Preserve intended meaning, register, audience and context rather than mechanically replacing words.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-107",
+      "topic": "translation",
+      "question": "What is a false friend?",
+      "answer": "A false friend resembles a word in another language but has a different meaning.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-108",
+      "topic": "translation",
+      "question": "When is literal translation useful?",
+      "answer": "Literal translations can illustrate grammar; idiomatic translations usually serve natural communication better.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-109",
+      "topic": "translation",
+      "question": "How should I translate an idiom?",
+      "answer": "Identify its meaning and register, then choose a natural equivalent or a brief paraphrase.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-110",
+      "topic": "translation",
+      "question": "Can two translations both be valid?",
+      "answer": "Yes. Multiple renderings may preserve meaning while differing in style or emphasis.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-111",
+      "topic": "study skills",
+      "question": "How many words should I learn daily?",
+      "answer": "Choose a sustainable number and revisit earlier words; meaningful use matters more than a fixed quota.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-112",
+      "topic": "study skills",
+      "question": "What is spaced repetition?",
+      "answer": "Spaced repetition revisits material over increasing intervals to strengthen retrieval.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-113",
+      "topic": "study skills",
+      "question": "How do I plan one week of language study?",
+      "answer": "Choose a communication goal, practice listening, speaking, reading and writing briefly each day, then self-check.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-114",
+      "topic": "study skills",
+      "question": "What should I do after a mistake?",
+      "answer": "Correct the pattern, make two new examples, and try again in conversation.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-115",
+      "topic": "study skills",
+      "question": "How do I measure improvement?",
+      "answer": "Compare dated examples of what you can understand and express independently, not only quiz scores.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-116",
+      "topic": "assessment",
+      "question": "Why is 80 percent important in Academy lessons?",
+      "answer": "Where the Academy uses an 80% mastery gate, reaching it unlocks progression; communicative proficiency needs additional evidence.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-117",
+      "topic": "assessment",
+      "question": "What if I score below 80 percent?",
+      "answer": "The established lesson rule permits editing and retrying without unexpected question reshuffling; check the particular course's implementation.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-118",
+      "topic": "assessment",
+      "question": "What counts as independent listening?",
+      "answer": "Understanding unfamiliar audio without relying entirely on a transcript, documented through an appropriate rubric.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-119",
+      "topic": "assessment",
+      "question": "How should speaking be graded?",
+      "answer": "Use clear criteria for comprehensibility, task completion, interaction and language use; do not penalize legitimate accents alone.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-120",
+      "topic": "assessment",
+      "question": "Why keep a language portfolio?",
+      "answer": "A dated portfolio shows original writing, listening reflection, dialogues, corrections and growth beyond a test score.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-121",
+      "topic": "privacy and tools",
+      "question": "Do you store my messages?",
+      "answer": "This introductory chat does not intentionally upload or save messages; avoid entering private records.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-122",
+      "topic": "privacy and tools",
+      "question": "What is Pierre-language-data.html?",
+      "answer": "It is my separate browser-local Creative Spark drafting workspace, not automatically synchronized with this public page.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-123",
+      "topic": "privacy and tools",
+      "question": "Can you access my student account?",
+      "answer": "No. This public chatbot has no authenticated student account access.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-124",
+      "topic": "privacy and tools",
+      "question": "Can I paste confidential documents for translation?",
+      "answer": "Please use an approved private workflow rather than entering confidential documents in this public chat.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-125",
+      "topic": "privacy and tools",
+      "question": "How do I propose a knowledge-bank entry?",
+      "answer": "Draft a clear question, accurate answer and provenance; review and approve it before publication.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-126",
+      "topic": "linguistic diversity",
+      "question": "Is one accent more correct than another?",
+      "answer": "Accents reflect legitimate linguistic varieties. For a given task, focus on comprehensibility and relevant sound contrasts.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-127",
+      "topic": "linguistic diversity",
+      "question": "What is code-switching?",
+      "answer": "Code-switching is alternating languages or varieties in discourse; it is a normal multilingual practice.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-128",
+      "topic": "linguistic diversity",
+      "question": "What is language revitalization?",
+      "answer": "Language revitalization supports increased use and transmission of a language through community-led education and cultural work.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-129",
+      "topic": "linguistic diversity",
+      "question": "What is a heritage language?",
+      "answer": "A heritage language is connected to family or community background and may be learned in different circumstances from a dominant societal language.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-130",
+      "topic": "linguistic diversity",
+      "question": "Why do languages change?",
+      "answer": "Languages change through ordinary usage, contact, social history and transmission across generations.",
       "status": "approved-public-seed"
     }
   ]
