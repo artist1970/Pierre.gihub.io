@@ -19,8 +19,12 @@ if(/\\b(what can you do|how can you help|your specialty)\\b/.test(s))return "My 
 if(/\\b(thank you|thanks|merci|gracias|danke|спасибо)\\b/.test(s))return "My pleasure! Merci à vous. Is there another question I can help with?";
 if(/\\b(goodbye|bye|see you later|au revoir)\\b/.test(s))return "Au revoir! Come back whenever curiosity calls.";
 const direct=records.find(r=>normalize(r.question)===s);if(direct)return direct.answer;
-const topic=Object.keys(topics).find(t=>topics[t].some(k=>s.includes(normalize(k))));if(topic){const r=records.find(x=>x.topic===topic);if(r)return r.answer;}
 if(s.includes("thank"))return "You're welcome. Languages reward curiosity and regular practice. What shall we explore next?";
+const tokens=x=>normalize(x).replace(/[^\\p{L}\\p{N}]+/gu," ").split(/\\s+/).filter(w=>w.length>2&&!["the","and","you","your","can","how","what","why","does","are","for","with","should","this","that","about","from","into","have","learn"].includes(w));
+const words=new Set(tokens(s));let best=null,bestScore=0;
+for(const r of records){const terms=[...new Set(tokens(r.question))];const common=terms.filter(t=>words.has(t)).length;const ratio=common/Math.max(terms.length,words.size,1);const score=common*2+ratio*3;if(common>=2&&score>bestScore){best=r;bestScore=score;}}
+if(best&&bestScore>=5)return best.answer;
+const topic=Object.keys(topics).find(t=>topics[t].some(k=>s.includes(normalize(k))));if(topic){const candidates=records.filter(x=>x.topic===topic);if(candidates.length===1)return candidates[0].answer;return "I'd be glad to explore "+topic+" with you. Are you interested in pronunciation, grammar, vocabulary, conversation, or a specific example?";}
 return fallback;}
 function append(who,text){const div=document.createElement("div");div.className="bubble "+(who==="You"?"you":"pierre");const b=document.createElement("span");b.className="speaker";b.textContent=who;const p=document.createElement("p");p.textContent=text;div.append(b,p);log.append(div);log.scrollTop=log.scrollHeight;}
 function submit(){const q=input.value.trim();if(!q)return;append("You",q);append("Pierre",answer(q));input.value="";input.focus();}
