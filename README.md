@@ -17,3 +17,8 @@ The public chatbot uses a small read-only editorial knowledge file and browser-l
 
 ## Verification needed
 Check GitHub Pages activation and deployed desktop/mobile behavior, keyboard navigation, schema failure fallback, speech availability, RTL display, and cross-origin privacy before calling this a production mentor system.
+
+## Private knowledge-growth workflow (2026-10-30)
+The public page shows **only the chat**. Unanswered questions that fall through Pierre's local response matcher can be stored in this browser's `localStorage` under `pierre.unanswered.review.v1` for future review. This is a **local, best-effort queue**, not a server-side cloud inbox. It has basic sensitive-term exclusions and duplicate checks, but these are not a substitute for server-side privacy filtering. Do not enable automatic uploads of children's conversations or publish these drafts.
+
+**Admin handoff remains unconnected.** An authenticated administrator endpoint, permission verification, explicit privacy policy, and consent/retention decisions must be established before remote submissions are enabled. A future trusted administrator tool can read approved exports from the local queue and review, redact, correct, and approve entries before publishing them to the mentor knowledge bank. The earlier standalone proposal and public network-search panels were removed from the landing page; their source files remain in the repository but are not loaded.
