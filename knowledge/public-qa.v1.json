@@ -1,7 +1,7 @@
 {
   "schema": "pierre-public-knowledge-v1",
   "mentorId": "pierre",
-  "version": 3,
+  "version": 4,
   "reviewStatus": "editorial-seed",
   "records": [
     {
@@ -1612,6 +1612,356 @@
       "topic": "Language-learning methods",
       "question": "How do I know when to advance a lesson?",
       "answer": "Meet the course's mastery requirement and demonstrate independent understanding through meaningful use, not memorized answers alone.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-231",
+      "topic": "French",
+      "question": "Can you explain French alphabet to a beginner?",
+      "answer": "French uses 26 letters A–Z. The first letter names are A (ah), B (bé), C (cé), D (dé), E (euh), F (effe).",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-232",
+      "topic": "French",
+      "question": "What should I learn first about French alphabet?",
+      "answer": "French uses 26 letters A–Z. The first letter names are A (ah), B (bé), C (cé), D (dé), E (euh), F (effe).",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-233",
+      "topic": "French",
+      "question": "Can we do a practice exercise about French alphabet?",
+      "answer": "Practice naming A through F, then spell an imaginary name.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-234",
+      "topic": "French",
+      "question": "Give me a simple example of French alphabet.",
+      "answer": "French uses 26 letters A–Z. The first letter names are A (ah), B (bé), C (cé), D (dé), E (euh), F (effe). Practice naming A through F, then spell an imaginary name.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-235",
+      "topic": "French",
+      "question": "How does French alphabet fit into French 101?",
+      "answer": "French uses 26 letters A–Z. The first letter names are A (ah), B (bé), C (cé), D (dé), E (euh), F (effe).",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-236",
+      "topic": "French",
+      "question": "Can you explain French greetings to a beginner?",
+      "answer": "Bonjour is a polite daytime hello, salut is informal, and bonsoir is for evenings.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-237",
+      "topic": "French",
+      "question": "What should I learn first about French greetings?",
+      "answer": "Bonjour is a polite daytime hello, salut is informal, and bonsoir is for evenings.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-238",
+      "topic": "French",
+      "question": "Can we do a practice exercise about French greetings?",
+      "answer": "Practise Bonjour ! Comment ça va ? — Ça va bien, merci.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-239",
+      "topic": "French",
+      "question": "Give me a simple example of French greetings.",
+      "answer": "Bonjour is a polite daytime hello, salut is informal, and bonsoir is for evenings. Practise Bonjour ! Comment ça va ? — Ça va bien, merci.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-240",
+      "topic": "French",
+      "question": "How does French greetings fit into French 101?",
+      "answer": "Bonjour is a polite daytime hello, salut is informal, and bonsoir is for evenings.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-241",
+      "topic": "French",
+      "question": "Can you explain French numbers to a beginner?",
+      "answer": "The first ten numbers are un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-242",
+      "topic": "French",
+      "question": "What should I learn first about French numbers?",
+      "answer": "The first ten numbers are un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-243",
+      "topic": "French",
+      "question": "Can we do a practice exercise about French numbers?",
+      "answer": "Count ten objects, then count backward.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-244",
+      "topic": "French",
+      "question": "Give me a simple example of French numbers.",
+      "answer": "The first ten numbers are un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix. Count ten objects, then count backward.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-245",
+      "topic": "French",
+      "question": "How does French numbers fit into French 101?",
+      "answer": "The first ten numbers are un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-246",
+      "topic": "French",
+      "question": "Can you explain French vowels to a beginner?",
+      "answer": "French vowel letters are a, e, i, o, u and sometimes y; vowel sounds also depend on accents and letter combinations.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-247",
+      "topic": "French",
+      "question": "What should I learn first about French vowels?",
+      "answer": "French vowel letters are a, e, i, o, u and sometimes y; vowel sounds also depend on accents and letter combinations.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-248",
+      "topic": "French",
+      "question": "Can we do a practice exercise about French vowels?",
+      "answer": "Compare vous and vu using reliable audio.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-249",
+      "topic": "French",
+      "question": "Give me a simple example of French vowels.",
+      "answer": "French vowel letters are a, e, i, o, u and sometimes y; vowel sounds also depend on accents and letter combinations. Compare vous and vu using reliable audio.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-250",
+      "topic": "French",
+      "question": "How does French vowels fit into French 101?",
+      "answer": "French vowel letters are a, e, i, o, u and sometimes y; vowel sounds also depend on accents and letter combinations.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-251",
+      "topic": "French",
+      "question": "Can you explain French introductions to a beginner?",
+      "answer": "Je m'appelle… means my name is…; Je suis… means I am…",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-252",
+      "topic": "French",
+      "question": "What should I learn first about French introductions?",
+      "answer": "Je m'appelle… means my name is…; Je suis… means I am…",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-253",
+      "topic": "French",
+      "question": "Can we do a practice exercise about French introductions?",
+      "answer": "Say Bonjour, je m'appelle Camille. Et vous ?",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-254",
+      "topic": "French",
+      "question": "Give me a simple example of French introductions.",
+      "answer": "Je m'appelle… means my name is…; Je suis… means I am… Say Bonjour, je m'appelle Camille. Et vous ?",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-255",
+      "topic": "French",
+      "question": "How does French introductions fit into French 101?",
+      "answer": "Je m'appelle… means my name is…; Je suis… means I am…",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-256",
+      "topic": "French",
+      "question": "Can you explain French articles to a beginner?",
+      "answer": "Le and la are definite articles; un and une are indefinite articles. Their forms reflect grammatical gender.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-257",
+      "topic": "French",
+      "question": "What should I learn first about French articles?",
+      "answer": "Le and la are definite articles; un and une are indefinite articles. Their forms reflect grammatical gender.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-258",
+      "topic": "French",
+      "question": "Can we do a practice exercise about French articles?",
+      "answer": "Compare le livre, la table, un livre and une table.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-259",
+      "topic": "French",
+      "question": "Give me a simple example of French articles.",
+      "answer": "Le and la are definite articles; un and une are indefinite articles. Their forms reflect grammatical gender. Compare le livre, la table, un livre and une table.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-260",
+      "topic": "French",
+      "question": "How does French articles fit into French 101?",
+      "answer": "Le and la are definite articles; un and une are indefinite articles. Their forms reflect grammatical gender.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-261",
+      "topic": "French",
+      "question": "Can you explain French pronunciation to a beginner?",
+      "answer": "French r is often made toward the back of the mouth; accents differ. Practise gently without straining.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-262",
+      "topic": "French",
+      "question": "What should I learn first about French pronunciation?",
+      "answer": "French r is often made toward the back of the mouth; accents differ. Practise gently without straining.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-263",
+      "topic": "French",
+      "question": "Can we do a practice exercise about French pronunciation?",
+      "answer": "Repeat rue slowly, then listen to a native recording.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-264",
+      "topic": "French",
+      "question": "Give me a simple example of French pronunciation.",
+      "answer": "French r is often made toward the back of the mouth; accents differ. Practise gently without straining. Repeat rue slowly, then listen to a native recording.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-265",
+      "topic": "French",
+      "question": "How does French pronunciation fit into French 101?",
+      "answer": "French r is often made toward the back of the mouth; accents differ. Practise gently without straining.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-266",
+      "topic": "French",
+      "question": "Can you explain French listening to a beginner?",
+      "answer": "Listen once for meaning, again for individual words, then repeat aloud. Consult a transcript afterward.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-267",
+      "topic": "French",
+      "question": "What should I learn first about French listening?",
+      "answer": "Listen once for meaning, again for individual words, then repeat aloud. Consult a transcript afterward.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-268",
+      "topic": "French",
+      "question": "Can we do a practice exercise about French listening?",
+      "answer": "Listen to bonjour and au revoir, then repeat.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-269",
+      "topic": "French",
+      "question": "Give me a simple example of French listening.",
+      "answer": "Listen once for meaning, again for individual words, then repeat aloud. Consult a transcript afterward. Listen to bonjour and au revoir, then repeat.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-270",
+      "topic": "French",
+      "question": "How does French listening fit into French 101?",
+      "answer": "Listen once for meaning, again for individual words, then repeat aloud. Consult a transcript afterward.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-271",
+      "topic": "French",
+      "question": "Can you explain French conversation to a beginner?",
+      "answer": "Use Je voudrais… for a polite request, and Pouvez-vous répéter ? to ask someone to repeat.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-272",
+      "topic": "French",
+      "question": "What should I learn first about French conversation?",
+      "answer": "Use Je voudrais… for a polite request, and Pouvez-vous répéter ? to ask someone to repeat.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-273",
+      "topic": "French",
+      "question": "Can we do a practice exercise about French conversation?",
+      "answer": "Try Je voudrais de l'eau, s'il vous plaît.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-274",
+      "topic": "French",
+      "question": "Give me a simple example of French conversation.",
+      "answer": "Use Je voudrais… for a polite request, and Pouvez-vous répéter ? to ask someone to repeat. Try Je voudrais de l'eau, s'il vous plaît.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-275",
+      "topic": "French",
+      "question": "How does French conversation fit into French 101?",
+      "answer": "Use Je voudrais… for a polite request, and Pouvez-vous répéter ? to ask someone to repeat.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-276",
+      "topic": "French",
+      "question": "Can you explain French course navigation to a beginner?",
+      "answer": "Begin in the Academy Linguistics Hall: https://vervenveda.com/Khaemenes_Linguistics.github.io/ . Select French 101, starting with Lesson 01: Alphabet.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-277",
+      "topic": "French",
+      "question": "What should I learn first about French course navigation?",
+      "answer": "Begin in the Academy Linguistics Hall: https://vervenveda.com/Khaemenes_Linguistics.github.io/ . Select French 101, starting with Lesson 01: Alphabet.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-278",
+      "topic": "French",
+      "question": "Can we do a practice exercise about French course navigation?",
+      "answer": "After the alphabet, study numbers, vowels, pronouns and greetings.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-279",
+      "topic": "French",
+      "question": "Give me a simple example of French course navigation.",
+      "answer": "Begin in the Academy Linguistics Hall: https://vervenveda.com/Khaemenes_Linguistics.github.io/ . Select French 101, starting with Lesson 01: Alphabet. After the alphabet, study numbers, vowels, pronouns and greetings.",
+      "status": "approved-public-seed"
+    },
+    {
+      "id": "pierre-public-280",
+      "topic": "French",
+      "question": "How does French course navigation fit into French 101?",
+      "answer": "Begin in the Academy Linguistics Hall: https://vervenveda.com/Khaemenes_Linguistics.github.io/ . Select French 101, starting with Lesson 01: Alphabet.",
       "status": "approved-public-seed"
     }
   ]
