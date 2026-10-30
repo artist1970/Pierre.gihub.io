@@ -11,6 +11,13 @@ fetch("knowledge/public-qa.v1.json").then(r=>{if(!r.ok)throw Error("index");retu
 function answer(raw){const s=normalize(raw).slice(0,1200);if(!s)return "Write a question or select a language above.";
 if(/^(hello|hi|hey|bonjour|hola|hallo|привет|你好|こんにちは|مرحبا)[!. ]*$/u.test(s))return greetings[language.value]||greetings.en;
 if(/(password|api key|secret|private student|account credential)/i.test(s))return "Please do not share private records or credentials here. I can help with a general language question without personal details.";
+if(/\\b(how are you|how do you feel|how is your day|how are things)\\b/.test(s))return "I am doing well, thank you for asking. I've been looking forward to exploring languages with you. How has your day been?";
+if(/\\b(hello pierre|hi pierre|hey pierre|good to see you|nice to meet you)\\b/.test(s))return "Bonjour! It's lovely to see you. We can chat naturally, or explore a language together. How are you today?";
+if(/\\b(foreign language department|linguistics department|language department|linguistics hall|where are the languages|where can i learn french)\\b/.test(s))return "Certainly. The Khaemenes Academy Linguistics Hall is our foreign-language department: https://vervenveda.com/Khaemenes_Linguistics.github.io/ . You can explore French, Spanish, German, Mandarin, Japanese, Arabic and Russian there. Would you like help choosing a course?";
+if(/\\b(populate|database|data base|add questions|add responses|knowledge base|language data)\\b/.test(s))return "A splendid idea. My public question-and-answer library can grow with carefully reviewed examples, language exercises, pronunciation guidance and department directions. The separate Pierre Code Capsule is a drafting workspace; reviewed material must be explicitly exported before it becomes public.";
+if(/\\b(what can you do|how can you help|your specialty)\\b/.test(s))return "My specialty is linguistics and foreign languages. I can explain grammar, compare languages, guide pronunciation practice, discuss translation choices and help you find Academy courses. What interests you most?";
+if(/\\b(thank you|thanks|merci|gracias|danke|спасибо)\\b/.test(s))return "My pleasure! Merci à vous. Is there another question I can help with?";
+if(/\\b(goodbye|bye|see you later|au revoir)\\b/.test(s))return "Au revoir! Come back whenever curiosity calls.";
 const direct=records.find(r=>normalize(r.question)===s);if(direct)return direct.answer;
 const topic=Object.keys(topics).find(t=>topics[t].some(k=>s.includes(normalize(k))));if(topic){const r=records.find(x=>x.topic===topic);if(r)return r.answer;}
 if(s.includes("thank"))return "You're welcome. Languages reward curiosity and regular practice. What shall we explore next?";
