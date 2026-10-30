@@ -3,6 +3,7 @@
 const input=document.getElementById("message"), send=document.getElementById("send"), clear=document.getElementById("clear"), log=document.getElementById("conversation"), language=document.getElementById("language"), voice=document.getElementById("voice");
 if(!input||!send||!log)return;
 let records=[],status="loading";
+let activeLanguage="";
 const pendingKey="pierre.unanswered.review.v1";
 function queueUnanswered(question){
   const cleaned=String(question||"").trim().slice(0,250);
@@ -26,6 +27,16 @@ const fallback="A useful place to begin is your goal. Which language or linguist
 const normalize=s=>String(s||"").toLocaleLowerCase().normalize("NFKC").trim();
 fetch("knowledge/public-qa.v1.json").then(r=>{if(!r.ok)throw Error("index");return r.json()}).then(d=>{if(d.schema!=="pierre-public-knowledge-v1"||!Array.isArray(d.records))throw Error("schema");records=d.records.filter(x=>x.status==="approved-public-seed"&&typeof x.answer==="string");status="ready"}).catch(()=>{status="offline-fallback"});
 function answer(raw){const s=normalize(raw).slice(0,1200);if(!s)return "Write a question or select a language above.";
+if(/\b(french|français)\b/i.test(s))activeLanguage="French";
+else if(/\b(spanish|español)\b/i.test(s))activeLanguage="Spanish";
+else if(/\b(german|deutsch)\b/i.test(s))activeLanguage="German";
+if(activeLanguage==="French"){
+ if(/\b(alphabet|letters|abc|a to z)\b/i.test(s))return "Wonderful! French uses the same 26 letters as English, but their names differ. Begin with A (ah), B (bé), C (cé), D (dé), E (euh), and F (effe). Say them aloud one at a time. We can practise the next six together.";
+ if(/\b(greeting|greetings|say hello|how to greet)\b/i.test(s))return "Let's begin with three French greetings: Bonjour (polite hello), Salut (informal hello), and Bonsoir (good evening). Try this dialogue: Bonjour ! Comment ça va ? — Ça va bien, merci. Your turn!";
+ if(/\b(where|start|begin|course|lesson|learn)\b/i.test(s)&&/\b(start|begin|course|lesson|where)\b/i.test(s))return "You can begin French 101 in the Khaemenes Academy Linguistics Hall: https://vervenveda.com/Khaemenes_Linguistics.github.io/ . Choose French 101, then Lesson 01: Alphabet. We can also practise the alphabet together here.";
+ if(/\b(i like french|love french|interested in french)\b/i.test(s))return "Magnifique ! Let's start with something useful: Bonjour means hello. Would you like to learn the French alphabet, practise greetings, or try a short dialogue?";
+}
+
 if(/^(hello|hi|hey|bonjour|hola|hallo|привет|你好|こんにちは|مرحبا)[!. ]*$/u.test(s))return greetings[language.value]||greetings.en;
 if(/\b(translator|translation tool|open translator|universal translator)\b/i.test(s)&&/\b(open|where|find|go to|use|tool)\b/i.test(s))return "The Academy's official Universal Translator is here: https://vervenveda.com/Khaemenes_Linguistics.github.io/apps/translator-entry.html . It has its own privacy and approval controls.";
 const referral=mentorReferrals.find(([name,pattern])=>pattern.test(s));if(referral)return referral[0]+" is the specialist best suited to that request. You can visit: "+referral[2]+" . I can also help with the language or translation aspects.";
