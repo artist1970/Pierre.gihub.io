@@ -35,7 +35,12 @@ function weightsFor(card){
 function draw(){
  const bank=session.pool;
  const unvisited=bank.filter(c=>!session.visited.has(c.id));
- const source=unvisited.length?unvisited:bank;
+ // Revisit an incorrectly answered question after at least four other draws.
+ // When possible, reserve about one draw in four for spaced review.
+ const cooling=new Set(session.recent.slice(0,4));
+ const due=bank.filter(c=>(session.misses.get(c.id)||0)>0&&!cooling.has(c.id));
+ const eligible=bank.filter(c=>!cooling.has(c.id));
+ const source=unvisited.length?(due.length&&float()<0.25?due:unvisited):(eligible.length?eligible:bank);
  if(!source.length)return null;
  const next=chooseWeighted(source,weightsFor);
  if(!next)return null;
