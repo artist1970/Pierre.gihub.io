@@ -1,0 +1,32 @@
+name: Pierre Language Knowledge Regression
+on:
+  push:
+    paths:
+      - "pierre-conversation-v1.js"
+      - "pierre-language-composer-v1.js"
+      - "pierre-grammar-guide-v1.js"
+      - "pierre-dictionary-adapter-v1.js"
+      - "knowledge/**"
+      - "tests/**"
+      - ".github/workflows/pierre-language-regression.yml"
+  pull_request:
+    paths:
+      - "pierre-conversation-v1.js"
+      - "pierre-language-composer-v1.js"
+      - "pierre-grammar-guide-v1.js"
+      - "pierre-dictionary-adapter-v1.js"
+      - "knowledge/**"
+      - "tests/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify approved language resources and sentence composition
+        run: node --test tests/*.test.mjs
