@@ -47,3 +47,14 @@ test("no network, storage, private repository access, or canonical bank modifica
  assert.equal(bank.records.length,530);
  assert.equal(dict.entries.length,6);
 });
+
+test("quiz checks learner choices and advances to the next practice word",()=>{
+ const {studio,lookup}=setup();
+ studio.handle("practice vocabulary",lookup);
+ assert.match(studio.handle("ability",lookup),/Not quite/);
+ assert.match(studio.handle("sentence",lookup),/Correct/);
+ studio.handle("more vocabulary practice",lookup);
+ assert.match(studio.handle("structure",lookup),/Correct/);
+ studio.reset();
+ assert.equal(studio.handle("ability",lookup),null);
+});
