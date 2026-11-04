@@ -75,3 +75,20 @@ test("empty or unapproved topic fails closed with no content invention",()=>{
 test("no persistent state, raw private exports or remote requests",()=>{
  assert.doesNotMatch(code,/localStorage|indexedDB|fetch\s*\(|XMLHttpRequest|raw\.githubusercontent/);
 });
+
+test("missed material is eligible again after four intervening questions",()=>{
+ const context={window:{crypto:{getRandomValues(array){array[0]=0;return array;}}}};
+ vm.runInNewContext(code,context,{timeout:1000});
+ const engine=context.window.PierreMonteCarloQA;
+ const ask=q=>engine.handle(q,qa.records,{status:"unavailable",lookup(){return null;}});
+ const first=ask("quiz me on French");
+ const firstQuestion=first.split(" Say 'show answer'")[0].replace(/^Question \d+/, "Question");
+ ask("show answer");ask("practice again");
+ let seenAgain=false;
+ for(let n=0;n<20;n++){
+  const output=ask("next question");
+  const same=output.split(" Say 'show answer'")[0].replace(/^Question \d+/, "Question");
+  if(same===firstQuestion){seenAgain=true;break;}
+ }
+ assert.equal(seenAgain,true,"incorrectly reviewed content should return after its cooldown");
+});
