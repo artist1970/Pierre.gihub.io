@@ -59,6 +59,11 @@ test("external AIPCore private URL is blocked before fetch",async()=>{
  assert.equal(await adapter.init("https://raw.githubusercontent.com/artist1970/AIPCore/main/dictionary/letters/A-words"),"blocked");
  assert.equal(adapter.size,0);
 });
+test("another mentor's same-origin project dictionary is blocked",async()=>{
+ const {adapter}=adapterFixture(approved);
+ assert.equal(await adapter.init("/OtherMentor.github.io/knowledge/export.json"),"blocked");
+ assert.equal(adapter.size,0);
+});
 test("missing dictionary URL remains disabled without modifying the chat",async()=>{
  const {adapter}=adapterFixture(approved);
  assert.equal(await adapter.init(""),"disabled");
