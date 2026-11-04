@@ -8,7 +8,7 @@ const bank=JSON.parse(readFileSync(new URL("../knowledge/public-qa.v1.json",impo
 const key=s=>String(s||"").toLocaleLowerCase().normalize("NFKC").trim().replace(/[.!?。？！]+$/u,"").trim();
 
 function boot(data=bank,fetchOK=true){
-  const elements=new Map();
+  const elements=new Map(),storage=new Map();
   function el(tag="div"){
     return {
       tagName:tag,children:[],value:"",textContent:"",listeners:{},style:{},
@@ -24,7 +24,7 @@ function boot(data=bank,fetchOK=true){
     createElement:el
   };
   const context={
-    document,window:{},localStorage:{getItem(){return null},setItem(){}},
+    document,window:{},localStorage:{getItem(k){return storage.get(k)??null},setItem(k,v){storage.set(k,v)}},
     fetch:async()=>fetchOK?{ok:true,json:async()=>data}:{ok:false},
     Option:function(label,value){return {label,value}},
     console:{warn(){},log(){}},
@@ -39,7 +39,7 @@ function boot(data=bank,fetchOK=true){
     const last=log.children.at(-1);
     return last?.children.find(x=>x.tagName==="p")?.textContent;
   };
-  return {ask,status:()=>document.getElementById("pierre-knowledge-status").textContent};
+  return {ask,status:()=>document.getElementById("pierre-knowledge-status").textContent,queued:()=>JSON.parse(storage.get("pierre.unanswered.review.v1")||"[]")};
 }
 
 test("published question bank preserves every approved record and unique ID",()=>{
@@ -86,4 +86,14 @@ test("failed knowledge fetch enters limited fallback without fake success",async
   await new Promise(resolve=>setImmediate(resolve));
   assert.match(app.status(),/unavailable.*offline/i);
   assert.ok(app.ask("What is code-switching?"));
+});
+
+test("unknown question reviews remain local and exclude child and URL text",async()=>{
+  const app=boot();
+  await new Promise(resolve=>setImmediate(resolve));
+  app.ask("Explain a flarbaxian gizmo mechanism");
+  assert.equal(app.queued().length,1);
+  app.ask("My child asked about a flarbaxian gizmo mechanism");
+  app.ask("See www.example.com about a flarbaxian gizmo mechanism");
+  assert.equal(app.queued().length,1);
 });
