@@ -1,0 +1,36 @@
+{
+  "schema": "pierre-public-dictionary-v1",
+  "version": 1,
+  "reviewStatus": "approved-public",
+  "source": {
+    "visibility": "public",
+    "repository": "artist1970/AIPCore",
+    "revision": "b48827b0adb5227dd60c12e5b758968e23f3ec3c"
+  },
+  "entries": [
+    {
+      "word": "abacus",
+      "definition": "A device with movable beads used for counting and arithmetic."
+    },
+    {
+      "word": "ability",
+      "definition": "The skill or capacity to do something."
+    },
+    {
+      "word": "abstract",
+      "definition": "Existing as an idea or concept rather than as a physical object."
+    },
+    {
+      "word": "sentence",
+      "definition": "A group of words that expresses a complete thought."
+    },
+    {
+      "word": "speech",
+      "definition": "The act of speaking or a formal spoken presentation."
+    },
+    {
+      "word": "structure",
+      "definition": "The way parts are arranged or organized to form a whole."
+    }
+  ]
+}
