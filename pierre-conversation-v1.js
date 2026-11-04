@@ -51,6 +51,9 @@ const grammarHelp=window.PierreGrammarGuide?.explain(raw);
 if(grammarHelp!==null&&grammarHelp!==undefined)return grammarHelp;
 // Exact approved answers take precedence over generic topic prompts.
 const direct=records.find(r=>questionKey(r.question)===questionKey(s));if(direct)return direct.answer;
+// Compose new instructional sentences from approved public content only.
+const composed=window.PierreLanguageComposer?.respond(raw,records,window.PierreDictionary);
+if(composed)return composed;
 
 // Accept ordinary learner phrasing without claiming a generative translation engine.
 const dictionaryIntent=s.match(/^(?:(?:(?:can|could|would)\s+you\s+(?:please\s+)?)|(?:please\s+))?(?:(?:define|explain\s+the\s+meaning\s+of)|(?:give\s+(?:me\s+)?(?:the\s+)?definition\s+of))\s+(?:(?:the\s+)?word\s+)?([\p{L}'-]+)[?.!]*$/u);
