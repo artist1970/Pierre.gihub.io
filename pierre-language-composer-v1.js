@@ -20,6 +20,16 @@ function dictPhrase(text,dict){
  if(dict?.status==="loading")return "My reviewed dictionary is loading. Please try again shortly.";
  return "I do not yet have a reviewed dictionary definition for '"+word+"'. The published pilot covers: "+suggestions.join(", ")+". We can still discuss a linguistic question using my approved Q&A bank.";
 }
+function sentencePractice(text,dict){
+ const q=norm(text);
+ if(!/\b(?:sentence|sentences|example|examples)\b/.test(q)||!/\b(?:create|make|write|give|show|use|using|with|in|practice)\b/.test(q))return null;
+ const words=suggestions.filter(w=>new RegExp("\\b"+w+"\\b","u").test(q));
+ if(words.length!==1)return null;
+ const word=words[0],definition=dict?.lookup?.(word,"definition");
+ if(!definition)return "I can make a practice sentence once that word's approved dictionary entry is available.";
+ const meaning=definition.slice(definition.indexOf(":")+1).trim().replace(/[.!?]+$/,"");
+ return "Here's an original vocabulary-practice sentence: 'Today we are studying the word "+word+" and its meaning.' In my reviewed dictionary, "+word+" means "+meaning.charAt(0).toLowerCase()+meaning.slice(1)+". Would you like to write your own sentence with it?";
+}
 function languageStarter(question,records){
  const q=norm(question);
  const match=q.match(/(?:\bi (?:want|would like|need) to learn|\blet'?s learn|\b(?:teach|help) me(?: to learn)?|\bhow (?:can|do) i learn|\bstart learning)\s+(english|french|spanish|german|mandarin|japanese|arabic|russian)\b/);
@@ -67,6 +77,8 @@ function respond(message,records,dict){
  const approved=safeEntries(records);
  const q=norm(message);
  if(!q)return null;
+ const practice=sentencePractice(q,dict);
+ if(practice)return practice;
  const lexical=dictPhrase(q,dict);
  if(lexical)return lexical;
  const learn=languageStarter(q,approved);
