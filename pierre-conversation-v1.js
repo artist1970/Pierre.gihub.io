@@ -51,6 +51,26 @@ const grammarHelp=window.PierreGrammarGuide?.explain(raw);
 if(grammarHelp!==null&&grammarHelp!==undefined)return grammarHelp;
 // Exact approved answers take precedence over generic topic prompts.
 const direct=records.find(r=>questionKey(r.question)===questionKey(s));if(direct)return direct.answer;
+
+// Accept ordinary learner phrasing without claiming a generative translation engine.
+const dictionaryIntent=s.match(/^(?:(?:(?:can|could|would)\s+you\s+(?:please\s+)?)|(?:please\s+))?(?:(?:define|explain\s+the\s+meaning\s+of)|(?:give\s+(?:me\s+)?(?:the\s+)?definition\s+of))\s+(?:(?:the\s+)?word\s+)?([\p{L}'-]+)[?.!]*$/u);
+if(dictionaryIntent){
+ const word=dictionaryIntent[1];
+ const lookedUp=window.PierreDictionary?.lookup(word,"definition");
+ if(lookedUp)return lookedUp;
+ if(window.PierreDictionary?.status==="loading")return "My approved dictionary is loading. Please try that definition again in a moment.";
+ return "I do not have an approved definition for '"+word+"' in my current public dictionary. It currently contains six reviewed words: abacus, ability, abstract, sentence, speech, and structure.";
+}
+if(/^(?:(?:can|could|would)\s+you\s+)?(?:define|explain|teach)(?:\s+me)?\s+(?:some\s+)?words[?.!]*$|^(?:can|could|would)\s+you\s+define\s+words[?.!]*$/u.test(s)){
+ return "Yes. Ask me to define a specific word, such as 'define abacus'. My approved public dictionary currently has six reviewed entries. You can also ask about vocabulary or word meanings.";
+}
+if(/\b(?:translat(?:e|ion)|transllate|translate)\b/u.test(s) && /\b(?:word|mother|into|to|from|language|mean)\b/u.test(s)){
+ return "I can help you explore translations and explain differences in meaning. Which language would you like to translate into? For a full translation, you can also use the Academy's Universal Translator: https://vervenveda.com/Khaemenes_Linguistics.github.io/apps/translator-entry.html .";
+}
+if(/\b(?:i\s+(?:want|would\s+like|need)\s+to\s+learn\s+english|teach\s+me\s+english|help\s+me\s+learn\s+english|learn\s+english)\b/u.test(s)){
+ return "I'd be glad to help you learn English! We can start with everyday greetings, useful vocabulary, simple sentence structure, or pronunciation. For a first practice, try writing: 'My name is ___. I am learning English.' Would you like to begin with conversation, reading, or grammar?";
+}
+
 if(/\b(french|français)\b/i.test(s))activeLanguage="French";
 else if(/\b(spanish|español)\b/i.test(s))activeLanguage="Spanish";
 else if(/\b(german|deutsch)\b/i.test(s))activeLanguage="German";
