@@ -6,7 +6,7 @@
 const normalize=s=>String(s||"").normalize("NFKC").toLocaleLowerCase().trim().replace(/\s+/g," ").replace(/[.!?]+$/,"");
 const topicKey=s=>normalize(s).replace(/[-_]+/g," ");
 const approved=records=>Array.isArray(records)?records.filter(x=>x&&x.status==="approved-public-seed"&&typeof x.question==="string"&&typeof x.answer==="string"&&x.question.trim()&&x.answer.trim()).slice(0,1500):[];
-const limits={maximumQuestions:500,history:12};
+const limits={maximumQuestions:1500,history:12};
 let session=null;
 function float(){return (root.crypto?.getRandomValues?root.crypto.getRandomValues(new Uint32Array(1))[0]/4294967296:Math.random());}
 function chooseWeighted(items,weight){
@@ -30,7 +30,7 @@ function wordsFromDictionary(dict){
 function weightsFor(card){
  const misses=session.misses.get(card.id)||0;
  const last=session.recent.indexOf(card.id);
- return (1+Math.min(misses,5)*2)*(last<0?1:.025)*(session.current?.id===card.id?.01:1);
+ return (1+Math.min(misses,5)*2)*(last<0?1:.025)*(session.current&&session.current.id===card.id?0.1:1);
 }
 function draw(){
  const bank=session.pool;
