@@ -23,9 +23,11 @@ function dictPhrase(text,dict){
 function sentencePractice(text,dict){
  const q=norm(text);
  if(!/\b(?:sentence|sentences|example|examples)\b/.test(q)||!/\b(?:create|make|write|give|show|use|using|with|in|practice)\b/.test(q))return null;
+ const named=q.match(/\b(?:using|with|word)\s+([a-z\x27-]+)\b/u);
  const words=suggestions.filter(w=>new RegExp("\\b"+w+"\\b","u").test(q));
- if(words.length!==1)return null;
- const word=words[0],definition=dict?.lookup?.(word,"definition");
+ const word=named&&suggestions.includes(named[1])?named[1]:(words.length===1?words[0]:null);
+ if(!word)return null;
+ const definition=dict?.lookup?.(word,"definition");
  if(!definition)return "I can make a practice sentence once that word's approved dictionary entry is available.";
  const meaning=definition.slice(definition.indexOf(":")+1).trim().replace(/[.!?]+$/,"");
  return "Here's an original vocabulary-practice sentence: 'Today we are studying the word "+word+" and its meaning.' In my reviewed dictionary, "+word+" means "+meaning.charAt(0).toLowerCase()+meaning.slice(1)+". Would you like to write your own sentence with it?";
