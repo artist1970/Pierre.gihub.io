@@ -4,6 +4,7 @@ on:
     paths:
       - "pierre-conversation-v1.js"
       - "pierre-language-composer-v1.js"
+      - "pierre-practice-studio-v1.js"
       - "pierre-grammar-guide-v1.js"
       - "pierre-dictionary-adapter-v1.js"
       - "knowledge/**"
@@ -13,6 +14,7 @@ on:
     paths:
       - "pierre-conversation-v1.js"
       - "pierre-language-composer-v1.js"
+      - "pierre-practice-studio-v1.js"
       - "pierre-grammar-guide-v1.js"
       - "pierre-dictionary-adapter-v1.js"
       - "knowledge/**"
