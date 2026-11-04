@@ -25,15 +25,18 @@ const greetings={fr:"Bonjour ! Je suis Pierre. Comment puis-je vous aider ?",es:
 const mentorReferrals=[["Archaemenes",/\b(principal|headmaster|academy mentor|school principal)\b/i,"https://artist1970.github.io/Archaemenes.github.io/"],["Eiren",/\b(poetry|literature|literary|creative writing)\b/i,"https://artist1970.github.io/Eiren.github.io/"],["Zelle",/\b(visual art|drawing|painting|bazaar art)\b/i,"https://artist1970.github.io/Zelle.github.io/"],["Hope",/\b(housing|community support|food assistance|support resources)\b/i,"https://artist1970.github.io/Hope.github.io/"],["Aurora",/\b(meditation|grounding|mindfulness|wellness reflection)\b/i,"https://artist1970.github.io/AuroraCore.github.io/"],["Moirai",/\b(music|composition|songwriting|the refrain)\b/i,"https://artist1970.github.io/Moirai.github.io/"],["NAIB",/\b(administrator|administrative|delegation|ecosystem navigator)\b/i,"https://artist1970.github.io/NAIB.github.io/"]];
 const fallback="A useful place to begin is your goal. Which language or linguistic topic are you exploring, and would you prefer an explanation, examples, or a practice exercise?";
 const normalize=s=>String(s||"").toLocaleLowerCase().normalize("NFKC").trim();
+// Comparison only: original approved content remains untouched.
+const questionKey=s=>normalize(s).replace(/[.!?。？！]+$/u,"").trim();
+const topicKey=s=>normalize(s).replace(/[-_]+/g," ").replace(/\s+/g," ");
 const knowledgeStatus=document.getElementById("pierre-knowledge-status");
 if(window.PierreDictionary)window.PierreDictionary.init(window.PIERRE_PUBLIC_DICTIONARY_URL||"");
 function showKnowledgeStatus(message){if(knowledgeStatus)knowledgeStatus.textContent=message;}
 fetch("knowledge/public-qa.v1.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw Error("index");return r.json()}).then(d=>{
- if(d.schema!=="pierre-public-knowledge-v1"||!Array.isArray(d.records))throw Error("schema");
+ if(d.schema!=="pierre-public-knowledge-v1"||d.mentorId!=="pierre"||!Array.isArray(d.records)||d.records.length>5000)throw Error("schema");
  const seen=new Set();
  records=d.records.filter(x=>{
   if(x.status!=="approved-public-seed"||typeof x.question!=="string"||typeof x.answer!=="string"||!x.answer.trim())return false;
-  const key=normalize(x.question);
+  const key=questionKey(x.question);
   if(seen.has(key))return false;
   seen.add(key);return true;
  });
@@ -41,6 +44,10 @@ fetch("knowledge/public-qa.v1.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw 
  showKnowledgeStatus("Pierre's knowledge bank ready: "+records.length+" questions loaded.");
 }).catch(()=>{status="offline-fallback";showKnowledgeStatus("Knowledge bank unavailable; limited offline responses are active.");});
 function answer(raw){const s=normalize(raw).slice(0,1200);if(!s)return "Write a question or select a language above.";
+// Guard credentials before content retrieval and heuristic routing.
+if(/(password|api key|secret|private student|account credential)/i.test(s))return "Please do not share private records or credentials here. I can help with a general language question without personal details.";
+// Exact approved answers take precedence over generic topic prompts.
+const direct=records.find(r=>questionKey(r.question)===questionKey(s));if(direct)return direct.answer;
 if(/\b(french|français)\b/i.test(s))activeLanguage="French";
 else if(/\b(spanish|español)\b/i.test(s))activeLanguage="Spanish";
 else if(/\b(german|deutsch)\b/i.test(s))activeLanguage="German";
@@ -54,7 +61,6 @@ if(activeLanguage==="French"){
 if(/^(hello|hi|hey|bonjour|hola|hallo|привет|你好|こんにちは|مرحبا)[!. ]*$/u.test(s))return greetings[language.value]||greetings.en;
 if(/\b(translator|translation tool|open translator|universal translator)\b/i.test(s)&&/\b(open|where|find|go to|use|tool)\b/i.test(s))return "The Academy's official Universal Translator is here: https://vervenveda.com/Khaemenes_Linguistics.github.io/apps/translator-entry.html . It has its own privacy and approval controls.";
 const referral=mentorReferrals.find(([name,pattern])=>pattern.test(s));if(referral)return referral[0]+" is the specialist best suited to that request. You can visit: "+referral[2]+" . I can also help with the language or translation aspects.";
-if(/(password|api key|secret|private student|account credential)/i.test(s))return "Please do not share private records or credentials here. I can help with a general language question without personal details.";
 if(/\b(how are you|how do you feel|how is your day|how are things)\b/.test(s))return "I am doing well, thank you for asking. I've been looking forward to exploring languages with you. How has your day been?";
 if(/\b(hello pierre|hi pierre|hey pierre|good to see you|nice to meet you)\b/.test(s))return "Bonjour! It's lovely to see you. We can chat naturally, or explore a language together. How are you today?";
 if(/\b(foreign language department|linguistics department|language department|linguistics hall|where are the languages|where can i learn french)\b/.test(s))return "Certainly. The Khaemenes Academy Linguistics Hall is our foreign-language department: https://vervenveda.com/Khaemenes_Linguistics.github.io/ . You can explore French, Spanish, German, Mandarin, Japanese, Arabic and Russian there. Would you like help choosing a course?";
@@ -62,7 +68,7 @@ if(/\b(populate|database|data base|add questions|add responses|knowledge base|la
 if(/\b(what can you do|how can you help|your specialty)\b/.test(s))return "My specialty is linguistics and foreign languages. I can explain grammar, compare languages, guide pronunciation practice, discuss translation choices and help you find Academy courses. What interests you most?";
 if(/\b(thank you|thanks|merci|gracias|danke|спасибо)\b/.test(s))return "My pleasure! Merci à vous. Is there another question I can help with?";
 if(/\b(goodbye|bye|see you later|au revoir)\b/.test(s))return "Au revoir! Come back whenever curiosity calls.";
-const direct=records.find(r=>normalize(r.question)===s);if(direct)return direct.answer;
+
 const dictionaryRequest=s.match(/^(?:what (?:is|does)|define|definition of|meaning of|synonyms? (?:of|for)|antonyms? (?:of|for))\s+(.+?)[?.!]*$/i);
 if(dictionaryRequest&&window.PierreDictionary){
  const mode=/^synonyms?/i.test(s)?"synonyms":/^antonyms?/i.test(s)?"antonyms":"definition";
@@ -72,9 +78,9 @@ if(dictionaryRequest&&window.PierreDictionary){
 if(s.includes("thank"))return "You're welcome. Languages reward curiosity and regular practice. What shall we explore next?";
 const tokens=x=>normalize(x).replace(/[^\p{L}\p{N}]+/gu," ").split(/\s+/).filter(w=>w.length>2&&!["the","and","you","your","can","how","what","why","does","are","for","with","should","this","that","about","from","into","have","learn"].includes(w));
 const words=new Set(tokens(s));let best=null,bestScore=0;
-for(const r of records){const terms=[...new Set(tokens(r.question))];const common=terms.filter(t=>words.has(t)).length;const ratio=common/Math.max(terms.length,words.size,1);const score=common*2+ratio*3;if(common>=2&&score>bestScore){best=r;bestScore=score;}}
+for(const r of records){const terms=[...new Set(tokens(r.question))];const common=terms.filter(t=>words.has(t)).length;const ratio=common/Math.max(terms.length,words.size,1);const score=common*2+ratio*3;if(common>=2&&ratio>=0.55&&score>bestScore){best=r;bestScore=score;}}
 if(best&&bestScore>=5)return best.answer;
-const topic=Object.keys(topics).find(t=>topics[t].some(k=>s.includes(normalize(k))));if(topic){const candidates=records.filter(x=>x.topic===topic);if(candidates.length===1)return candidates[0].answer;return "I'd be glad to explore "+topic+" with you. Are you interested in pronunciation, grammar, vocabulary, conversation, or a specific example?";}
+const topic=Object.keys(topics).find(t=>topics[t].some(k=>s.includes(normalize(k))));if(topic){const candidates=records.filter(x=>topicKey(x.topic)===topicKey(topic));if(candidates.length===1)return candidates[0].answer;return "I'd be glad to explore "+topic+" with you. Are you interested in pronunciation, grammar, vocabulary, conversation, or a specific example?";}
 return fallback;}
 function append(who,text){const div=document.createElement("div");div.className="bubble "+(who==="You"?"you":"pierre");const b=document.createElement("span");b.className="speaker";b.textContent=who;const p=document.createElement("p");p.textContent=text;div.append(b,p);log.append(div);log.scrollTop=log.scrollHeight;}
 function submit(){const q=input.value.trim();if(!q)return;const reply=answer(q);append("You",q);append("Pierre",reply);if(reply===fallback&&status==="ready")queueUnanswered(q);input.value="";input.focus();}
