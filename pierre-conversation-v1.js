@@ -46,6 +46,9 @@ fetch("knowledge/public-qa.v1.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw 
 function answer(raw){const s=normalize(raw).slice(0,1200);if(!s)return "Write a question or select a language above.";
 // Guard credentials before content retrieval and heuristic routing.
 if(/(password|api key|secret|private student|account credential)/i.test(s))return "Please do not share private records or credentials here. I can help with a general language question without personal details.";
+// Grammar feedback is opt-in and advisory. Never rewrite a learner's message.
+const grammarHelp=window.PierreGrammarGuide?.explain(raw);
+if(grammarHelp!==null&&grammarHelp!==undefined)return grammarHelp;
 // Exact approved answers take precedence over generic topic prompts.
 const direct=records.find(r=>questionKey(r.question)===questionKey(s));if(direct)return direct.answer;
 if(/\b(french|français)\b/i.test(s))activeLanguage="French";
