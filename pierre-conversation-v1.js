@@ -8,7 +8,7 @@ const pendingKey="pierre.unanswered.review.v1";
 function queueUnanswered(question){
   const cleaned=String(question||"").trim().slice(0,250);
   // Do not collect free-text questions that may include identifying or sensitive details.
-  if(cleaned.length<8||/(@|https?:|www\\.|\b(?:password|api.?key|secret|token|address|phone|email|student|child|minor|medical|diagnosis|therapy|health|social.security|credit.card|born|birthday|live at|my name is|my daughter|my son)\b)/i.test(cleaned))return;
+  if(cleaned.length<8||/(@|https?:|www\.|\b(?:password|api.?key|secret|token|address|phone|email|student|child|minor|medical|diagnosis|therapy|health|social.security|credit.card|born|birthday|live at|my name is|my daughter|my son)\b)/i.test(cleaned))return;
   try{
     const now=Date.now(),ttl=7*24*60*60*1000;
     const raw=JSON.parse(localStorage.getItem(pendingKey)||"[]");
