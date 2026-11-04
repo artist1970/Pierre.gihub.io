@@ -22,7 +22,8 @@ async function init(url){
  if(typeof url!=="string"||!url){state="disabled";return state;}
  // Only a same-origin, explicitly approved JSON export can be loaded.
  const parsed=new URL(url,root.location.href);
- if(parsed.origin!==root.location.origin||!parsed.pathname.endsWith(".json")){state="blocked";return state;}
+ const approvedDirectory=new URL("knowledge/",root.location.href).pathname;
+ if(parsed.origin!==root.location.origin||!parsed.pathname.startsWith(approvedDirectory)||!parsed.pathname.endsWith(".json")){state="blocked";return state;}
  state="loading";
  try{
   const response=await fetch(parsed.href,{cache:"no-cache",credentials:"same-origin"});
