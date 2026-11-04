@@ -34,7 +34,7 @@ const examples=Object.freeze({
  ]
 });
 const count=new Map();
-let recentWord=null;
+let recentWord=null,activeQuiz=null;
 const clean=s=>String(s||"").normalize("NFKC").toLocaleLowerCase().replace(/[‘’]/g,"'").replace(/\s+/g," ").trim();
 const words=Object.keys(examples);
 function nextExample(word){
@@ -45,6 +45,11 @@ function nextExample(word){
 }
 function handle(question,dict){
  const q=clean(question).replace(/[?.!]+$/,"");
+ if(activeQuiz && /^[a-z-]{2,30}$/.test(q)){
+  const current=activeQuiz;
+  if(q===current.answer){activeQuiz=null;return "Correct! '"+current.answer+"' matches that meaning. Would you like another vocabulary practice question?";}
+  if(current.choices.includes(q))return "Not quite. Try another choice. Hint: "+current.hint;
+ }
  const explicit=q.match(/\b(?:sentence|sentences|example|examples)\b.*\b(?:using|with|for)\s+(?:the\s+word\s+)?([a-z'-]+)$/u)
   ||q.match(/\b(?:use|using)\s+([a-z'-]+)\s+in\s+(?:a|an|another)\s+sentence$/u);
  if(explicit&&words.includes(explicit[1])){
@@ -62,12 +67,14 @@ function handle(question,dict){
   return "Here is another English conversation prompt: 'What do you enjoy reading or learning about?' Answer in a sentence. You can begin with 'I enjoy...' and add one reason using 'because'.";
  }
  if(/^(?:practice|let'?s practice|quiz me on|give me a quiz on)\s+(?:the\s+)?(?:word|vocabulary|words|definitions)(?:\s+please)?$/.test(q)){
+  activeQuiz={answer:"sentence",choices:["sentence","ability","abacus"],hint:"A complete thought expressed in words."};
   return "Vocabulary practice: Which of our six reviewed words means 'a group of words that expresses a complete thought'? Choose: sentence, ability, or abacus. Reply with your choice, and I can explain it.";
  }
  if(/^(?:more|another|next)\s+(?:vocabulary|word)\s+(?:practice|quiz)$/.test(q)){
+  activeQuiz={answer:"structure",choices:["speech","structure","abstract"],hint:"Think about how parts are organized."};
   return "Try a different vocabulary question: Which reviewed word describes 'the way parts are arranged or organized'? Choose: speech, structure, or abstract.";
  }
  return null;
 }
-root.PierrePracticeStudio=Object.freeze({handle,get supportedWords(){return [...words]},reset(){count.clear();recentWord=null}});
+root.PierrePracticeStudio=Object.freeze({handle,get supportedWords(){return [...words]},reset(){count.clear();recentWord=null;activeQuiz=null}});
 })(window);
