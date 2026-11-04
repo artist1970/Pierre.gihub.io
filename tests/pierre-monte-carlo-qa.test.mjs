@@ -40,8 +40,8 @@ test("all 530 published source Q&A records and dictionary words are preserved",(
  assert.equal(approvedDictionary.entries.length,6);
  const {engine,ask}=boot();
  assert.match(ask("monte carlo q&a"),/Question 1/);
- assert.ok(engine.stats.pool<=500);
- assert.equal(engine.stats.pool,500); // deliberate per-session cap; 530 published records remain unchanged
+ assert.ok(engine.stats.pool<=1500);
+ assert.equal(engine.stats.pool,527); // every distinct approved question participates in mixed sampling
 });
 test("open-ended responses are revealed before self-scoring",()=>{
  const {engine,ask}=boot();
