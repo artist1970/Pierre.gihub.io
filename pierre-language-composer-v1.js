@@ -22,7 +22,7 @@ function dictPhrase(text,dict){
 }
 function languageStarter(question,records){
  const q=norm(question);
- const match=q.match(/(?:\bi (?:want|would like|need) to learn|\blet'?s learn|\b(?:teach|help) me (?:to learn )?|\bhow (?:can|do) i learn|\bstart learning)\s+(english|french|spanish|german|mandarin|japanese|arabic|russian)\b/);
+ const match=q.match(/(?:\bi (?:want|would like|need) to learn|\blet'?s learn|\b(?:teach|help) me(?: to learn)?|\bhow (?:can|do) i learn|\bstart learning)\s+(english|french|spanish|german|mandarin|japanese|arabic|russian)\b/);
  if(!match)return null;
  const language=match[1];
  const lookups={english:["How do I review grammar without rote memorization alone?","What is an effective beginner dialogue?"],
