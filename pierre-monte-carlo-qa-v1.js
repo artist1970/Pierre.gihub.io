@@ -48,7 +48,7 @@ function draw(){
 function display(card){
  if(!card)return "No approved questions are available for that topic.";
  const prefix="Question "+session.asked+" · "+(session.mode==="vocabulary"?"vocabulary":card.topic)+": ";
- return prefix+card.question+(session.mode==="vocabulary"?" Reply with one of the choices below.":" Say 'show answer' to reveal the approved explanation, then 'got it' or 'practice again' to continue.");
+ return prefix+card.question+(session.mode==="vocabulary"?" Reply with one of the choices above.":" Say 'show answer' to reveal the approved explanation, then 'got it' or 'practice again' to continue.");
 }
 function startVocabulary(dict){
  const words=wordsFromDictionary(dict);
@@ -59,7 +59,8 @@ function startVocabulary(dict){
   const picks=[];while(picks.length<2&&distractors.length){const ix=Math.floor(float()*distractors.length);picks.push(distractors.splice(ix,1)[0]);}
   const choices=[w.word,...picks];
   for(let i=choices.length-1;i>0;i--){const j=Math.floor(float()*(i+1));[choices[i],choices[j]]=[choices[j],choices[i]];}
-  return {id:"dictionary:"+w.word,word:w.word,question:"Which word means: "+w.definition+"? Choices: "+choices.join(", ")+".",answer:w.word,choices,topic:"vocabulary"};
+  const cleanDefinition=w.definition.replace(/[.!?]+$/,"");
+  return {id:"dictionary:"+w.word,word:w.word,definition:cleanDefinition,question:"Which word means: "+cleanDefinition+"? Choices: "+choices.join(", ")+".",answer:w.word,choices,topic:"vocabulary"};
  });
  session={mode:"vocabulary",pool,misses:new Map(),visited:new Set(),recent:[],current:null,revealed:false,asked:0,correct:0,attempted:0};
  return display(draw());
@@ -93,12 +94,12 @@ function handle(input,records,dict){
   const answer=normalize(q.replace(/^(?:my answer is|i choose|i think it is|the answer is)\s+/,""));
   if(card.choices.includes(answer)){
    session.attempted++;
-   if(answer===card.answer){session.correct++;const explanation=card.question.slice("Which word means: ".length).split("? Choices:")[0];return "Correct! '"+card.answer+"' means "+explanation+". "+display(draw());}
+   if(answer===card.answer){session.correct++;return "Correct! '"+card.answer+"' means "+card.definition+". "+display(draw());}
    session.misses.set(card.id,(session.misses.get(card.id)||0)+1);
    return "Not quite. Try another option from this question's choices, or say 'show answer' for the approved definition.";
   }
   if(q==="show answer"){
-   session.revealed=true;return "Approved answer: "+card.word+". "+card.question.slice("Which word means: ".length).split("? Choices:")[0]+". Say 'next question' to continue.";
+   session.revealed=true;return "Approved answer: "+card.word+". "+card.definition+". Say 'next question' to continue.";
   }
   if(q==="repeat question")return display(card);
   return null;
