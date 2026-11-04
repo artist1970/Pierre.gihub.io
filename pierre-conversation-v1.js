@@ -51,6 +51,9 @@ const grammarHelp=window.PierreGrammarGuide?.explain(raw);
 if(grammarHelp!==null&&grammarHelp!==undefined)return grammarHelp;
 // Exact approved answers take precedence over generic topic prompts.
 const direct=records.find(r=>questionKey(r.question)===questionKey(s));if(direct)return direct.answer;
+// Randomized practice is session-only and must not override exact approved answers.
+const monteCarlo=window.PierreMonteCarloQA?.handle(raw,records,window.PierreDictionary);
+if(monteCarlo)return monteCarlo;
 // Guided conversation and varied practice use only reviewed public words.
 const practiceResponse=window.PierrePracticeStudio?.handle(raw,window.PierreDictionary);
 if(practiceResponse)return practiceResponse;
