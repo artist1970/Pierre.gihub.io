@@ -32,7 +32,7 @@ test("subject, action, setting and reason advance a three-stage story sentence a
 });
 test("missing grammar features elicit useful hints and do not award progress",()=>{
  const d=boot();d.handle("practice please");
- assert.match(d.handle("purple"),/subject and an action/i);
+ assert.match(d.handle("purple"),/someone or something and an action/i);
  assert.equal(d.state.stage,0);
  d.handle("I wrote a story.");
  assert.match(d.handle("I wrote a story."),/where it happened/i);
