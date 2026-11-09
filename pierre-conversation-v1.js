@@ -159,21 +159,34 @@ else setAudioStatus("Speech playback is unavailable in this browser.");
 for(const [control,output,format] of [[volume,document.getElementById("pierre-volume-value"),v=>v+"%"],[pace,document.getElementById("pierre-pace-value"),v=>Number(v).toFixed(2)+"×"]]){
  if(control&&output)control.addEventListener("input",()=>{output.textContent=format(control.value);});
 }
-if(voice)voice.addEventListener("click",()=>{
+function languageFor(text){
+ if(/[\u0600-\u06FF]/u.test(text))return "ar";
+ if(/[\u3040-\u30FF]/u.test(text))return "ja";
+ if(/[\u4E00-\u9FFF]/u.test(text))return language?.value==="ja"?"ja":"zh";
+ if(/[\u0400-\u052F]/u.test(text))return "ru";
+ return language?.value||"en";
+}
+function speakText(text){
  if(!speechAvailable){setAudioStatus("Speech playback is unavailable in this browser.");return;}
- const last=[...log.querySelectorAll(".bubble.pierre p")].at(-1);
- if(!last)return;
  window.speechSynthesis.cancel();
- const utterance=new SpeechSynthesisUtterance(last.textContent);
- const chosen=selectedVoice();
+ const target=languageFor(text);
+ const tags={en:"en-GB",fr:"fr-FR",es:"es-ES",de:"de-DE",zh:"zh-CN",ja:"ja-JP",ar:"ar",ru:"ru-RU"};
+ const lang=tags[target]||"en-GB";
+ const match=target==="en"?selectedVoice():availableVoices.find(v=>String(v.lang||"").toLowerCase().startsWith(target.toLowerCase()));
+ const chosen=match||selectedVoice();
+ const utterance=new SpeechSynthesisUtterance(text);
  if(chosen){utterance.voice=chosen;utterance.lang=chosen.lang;}
- else utterance.lang="en-GB";
+ else utterance.lang=lang;
  utterance.volume=volume?Number(volume.value)/100:0.8;
  utterance.rate=pace?Number(pace.value):0.85;
- utterance.onstart=()=>setAudioStatus("Pierre is speaking with "+(chosen?chosen.name:PIERRE_VOICE_PROFILE)+".");
+ utterance.onstart=()=>setAudioStatus(match||target==="en"?"Pierre is speaking with "+(chosen?.name||PIERRE_VOICE_PROFILE)+".":"No "+lang+" voice was found. Playing the available fallback voice.");
  utterance.onend=()=>setAudioStatus("Playback finished.");
- utterance.onerror=e=>{if(e.error!=="canceled"&&e.error!=="interrupted")setAudioStatus("Pierre’s narrator voice is unavailable on this device.");};
+ utterance.onerror=e=>{if(e.error!=="canceled"&&e.error!=="interrupted")setAudioStatus("Pierre's speech playback is unavailable on this device.");};
  window.speechSynthesis.speak(utterance);
+}
+if(voice)voice.addEventListener("click",()=>{
+ const last=[...log.querySelectorAll(".bubble.pierre p")].at(-1);
+ if(last)speakText(last.textContent);
 });
 if(stopVoice)stopVoice.addEventListener("click",()=>{if(speechAvailable)window.speechSynthesis.cancel();setAudioStatus("Audio stopped.");});
 append("Pierre",greetings.en);
