@@ -4,8 +4,13 @@ const input=document.getElementById("message"), send=document.getElementById("se
 if(!input||!send||!log)return;
 let records=[],status="loading";
 let activeLanguage="";
+let lastTopic="",lastRecordId="";
+const reviewOptIn=document.getElementById("pierre-review-opt-in"),reviewClear=document.getElementById("pierre-review-clear"),reviewStatus=document.getElementById("pierre-review-status");
+const reviewEnabled=()=>reviewOptIn?.checked===true;
+function reportReview(text){if(reviewStatus)reviewStatus.textContent=text;}
 const pendingKey="pierre.unanswered.review.v1";
 function queueUnanswered(question){
+ if(!reviewEnabled())return;
   const cleaned=String(question||"").trim().slice(0,250);
   // Do not collect free-text questions that may include identifying or sensitive details.
   if(cleaned.length<8||/(@|https?:|www\.|\b(?:password|api.?key|secret|token|address|phone|email|student|child|minor|medical|diagnosis|therapy|health|social.security|credit.card|born|birthday|live at|my name is|my daughter|my son)\b)/i.test(cleaned))return;
@@ -22,7 +27,7 @@ function queueUnanswered(question){
 }
 const topics={french:["french","français","bonjour"],spanish:["spanish","español","hola"],german:["german","deutsch"],mandarin:["mandarin","chinese","tones"],japanese:["japanese","hiragana","katakana"],arabic:["arabic","عربي"],russian:["russian","русский"],phonetics:["phonetic","ipa","speech sound"],phonology:["phonology","phoneme"],morphology:["morpholog","morpheme"],syntax:["syntax","word order"],semantics:["semantics","meaning"],pragmatics:["pragmatic","context"],translation:["translate","translation"],dictionary:["dictionary","definition"],thesaurus:["thesaurus","synonym","antonym"],accent:["accent","pronunciation"],listening:["listening","hear"],conversation:["conversation","speaking","speak"],grammar:["grammar"],culture:["culture","custom"],assessment:["assessment","mastery","80%"],writing:["writing","write"],"code-switching":["code switch","bilingual"],etymology:["etymology","origin of word"],"language families":["language family","related languages"],register:["formal","informal","register"],voice:["voice","listen aloud"],privacy:["privacy","save my chat"],identity:["who are you","your name"]};
 const greetings={fr:"Bonjour ! Je suis Pierre. Comment puis-je vous aider ?",es:"¡Hola! Soy Pierre. ¿Qué te gustaría aprender?",de:"Guten Tag! Ich bin Pierre. Was möchten Sie lernen?",zh:"你好！我是皮埃尔。你想学习什么？",ja:"こんにちは！ピエールです。何を学びたいですか？",ar:"مرحباً! أنا بيير. ماذا تود أن تتعلم؟",ru:"Здравствуйте! Я Пьер. Что вы хотите изучить?",en:"Hello! I'm Pierre. We can explore languages, grammar, pronunciation, and the art of communicating."};
-const mentorReferrals=[["Archaemenes",/\b(principal|headmaster|academy mentor|school principal)\b/i,"https://artist1970.github.io/Archaemenes.github.io/"],["Eiren",/\b(poetry|literature|literary|creative writing)\b/i,"https://artist1970.github.io/Eiren.github.io/"],["Zelle",/\b(visual art|drawing|painting|bazaar art)\b/i,"https://artist1970.github.io/Zelle.github.io/"],["Hope",/\b(housing|community support|food assistance|support resources)\b/i,"https://artist1970.github.io/Hope.github.io/"],["Aurora",/\b(meditation|grounding|mindfulness|wellness reflection)\b/i,"https://artist1970.github.io/AuroraCore.github.io/"],["Moirai",/\b(music|composition|songwriting|the refrain)\b/i,"https://artist1970.github.io/Moirai.github.io/"],["NAIB",/\b(administrator|administrative|delegation|ecosystem navigator)\b/i,"https://artist1970.github.io/NAIB.github.io/"]];
+const mentorReferrals=[["Archaemenes",/\b(principal|headmaster|academy mentor|school principal)\b/i,"https://artist1970.github.io/Archaemenes.github.io/"],["Eiren",/\b(poetry|literature|literary|creative writing)\b/i,"https://artist1970.github.io/Eiren.github.io/"],["Zelle",/\b(visual art|drawing|painting|bazaar art)\b/i,"https://artist1970.github.io/Zelle.github.io/"],["Hope",/\b(housing|community support|food assistance|support resources)\b/i,"https://artist1970.github.io/Hope.github.io/"],["Aurora",/\b(meditation|grounding|mindfulness|wellness reflection)\b/i,"https://artist1970.github.io/Aurora.github.io/"],["Moirai",/\b(music|composition|songwriting|the refrain)\b/i,"https://artist1970.github.io/Moirai.github.io/"],["NAIB",/\b(administrator|administrative|delegation|ecosystem navigator)\b/i,"https://artist1970.github.io/NAIB.github.io/"]];
 const fallback="A useful place to begin is your goal. Which language or linguistic topic are you exploring, and would you prefer an explanation, examples, or a practice exercise?";
 const normalize=s=>String(s||"").toLocaleLowerCase().normalize("NFKC").trim();
 // Comparison only: original approved content remains untouched.
@@ -33,13 +38,14 @@ if(window.PierreDictionary)window.PierreDictionary.init(window.PIERRE_PUBLIC_DIC
 function showKnowledgeStatus(message){if(knowledgeStatus)knowledgeStatus.textContent=message;}
 fetch("knowledge/public-qa.v1.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw Error("index");return r.json()}).then(d=>{
  if(d.schema!=="pierre-public-knowledge-v1"||d.mentorId!=="pierre"||!Array.isArray(d.records)||d.records.length>5000)throw Error("schema");
- const seen=new Set();
- records=d.records.filter(x=>{
-  if(x.status!=="approved-public-seed"||typeof x.question!=="string"||typeof x.answer!=="string"||!x.answer.trim())return false;
+ const best=new Map();
+ for(const x of d.records){
+  if(x.status!=="approved-public-seed"||typeof x.question!=="string"||typeof x.answer!=="string"||!x.answer.trim())continue;
   const key=questionKey(x.question);
-  if(seen.has(key))return false;
-  seen.add(key);return true;
- });
+  const old=best.get(key);
+  if(!old||x.answer.length>old.answer.length)best.set(key,x);
+ }
+ records=[...best.values()];
  status="ready";
  showKnowledgeStatus("Pierre's knowledge bank ready: "+records.length+" questions loaded.");
 }).catch(()=>{status="offline-fallback";showKnowledgeStatus("Knowledge bank unavailable; limited offline responses are active.");});
@@ -50,14 +56,20 @@ if(/(password|api key|secret|private student|account credential)/i.test(s))retur
 const grammarHelp=window.PierreGrammarGuide?.explain(raw);
 if(grammarHelp!==null&&grammarHelp!==undefined)return grammarHelp;
 // Exact approved answers take precedence over generic topic prompts.
-const direct=records.find(r=>questionKey(r.question)===questionKey(s));if(direct)return direct.answer;
+const direct=records.find(r=>questionKey(r.question)===questionKey(s));if(direct){lastTopic=topicKey(direct.topic);lastRecordId=direct.id;return direct.answer;}
 // Randomized practice is session-only and must not override exact approved answers.
 const monteCarlo=window.PierreMonteCarloQA?.handle(raw,records,window.PierreDictionary);
 if(monteCarlo)return monteCarlo;
 // Guided conversation and varied practice use only reviewed public words.
 const practiceResponse=window.PierrePracticeStudio?.handle(raw,window.PierreDictionary);
 if(practiceResponse)return practiceResponse;
-// Compose new instructional sentences from approved public content only.
+// Session-only approved follow-up: no invented knowledge or remote learner context.
+ if(/^(?:tell me more|continue this topic|another example|more about that|what else about that)[?.!]*$/.test(s)&&lastTopic){
+  const next=records.find(r=>topicKey(r.topic)===lastTopic&&r.id!==lastRecordId);
+  if(next){lastRecordId=next.id;return next.answer+" Would you like another related question?";}
+  return "That is the end of my approved examples for this topic. Which aspect would you like to explore?";
+ }
+ // Compose new instructional sentences from approved public content only.
 const composed=window.PierreLanguageComposer?.respond(raw,records,window.PierreDictionary);
 if(composed)return composed;
 
@@ -111,13 +123,15 @@ if(s.includes("thank"))return "You're welcome. Languages reward curiosity and re
 const tokens=x=>normalize(x).replace(/[^\p{L}\p{N}]+/gu," ").split(/\s+/).filter(w=>w.length>2&&!["the","and","you","your","can","how","what","why","does","are","for","with","should","this","that","about","from","into","have","learn"].includes(w));
 const words=new Set(tokens(s));let best=null,bestScore=0;
 for(const r of records){const terms=[...new Set(tokens(r.question))];const common=terms.filter(t=>words.has(t)).length;const ratio=common/Math.max(terms.length,words.size,1);const score=common*2+ratio*3;if(common>=2&&ratio>=0.55&&score>bestScore){best=r;bestScore=score;}}
-if(best&&bestScore>=5)return best.answer;
-const topic=Object.keys(topics).find(t=>topics[t].some(k=>s.includes(normalize(k))));if(topic){const candidates=records.filter(x=>topicKey(x.topic)===topicKey(topic));if(candidates.length===1)return candidates[0].answer;return "I'd be glad to explore "+topic+" with you. Are you interested in pronunciation, grammar, vocabulary, conversation, or a specific example?";}
+if(best&&bestScore>=5){lastTopic=topicKey(best.topic);lastRecordId=best.id;return best.answer;}
+const topic=Object.keys(topics).find(t=>topics[t].some(k=>s.includes(normalize(k))));if(topic){lastTopic=topicKey(topic);const candidates=records.filter(x=>topicKey(x.topic)===topicKey(topic));if(candidates.length===1)return candidates[0].answer;return "I'd be glad to explore "+topic+" with you. Are you interested in pronunciation, grammar, vocabulary, conversation, or a specific example?";}
 return fallback;}
-function append(who,text){const div=document.createElement("div");div.className="bubble "+(who==="You"?"you":"pierre");const b=document.createElement("span");b.className="speaker";b.textContent=who;const p=document.createElement("p");p.textContent=text;div.append(b,p);log.append(div);log.scrollTop=log.scrollHeight;}
+function append(who,text){const div=document.createElement("div");div.className="bubble "+(who==="You"?"you":"pierre");const b=document.createElement("span");b.className="speaker";b.textContent=who;const p=document.createElement("p");p.textContent=text;div.append(b,p);if(who!=="You"){const play=document.createElement("button");play.type="button";play.textContent="Listen to this reply";play.setAttribute("aria-label","Listen to Pierre's reply");play.style.cssText="margin-top:9px;padding:7px 12px;font:inherit;font-size:16px;border:1px solid #bdab83;background:transparent;color:#fffaf0;cursor:pointer";play.addEventListener("click",()=>speakText(text));div.append(play);}log.append(div);log.scrollTop=log.scrollHeight;}
 function submit(){const q=input.value.trim();if(!q)return;const reply=answer(q);append("You",q);append("Pierre",reply);if(reply===fallback&&status==="ready")queueUnanswered(q);input.value="";input.focus();}
 send.addEventListener("click",submit);input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});
-clear.addEventListener("click",()=>{log.replaceChildren();append("Pierre",greetings[language.value]||greetings.en);input.value="";});
+clear.addEventListener("click",()=>{log.replaceChildren();append("Pierre",greetings[language.value]||greetings.en);input.value="";lastTopic="";lastRecordId="";window.PierreMonteCarloQA?.reset?.();window.PierrePracticeStudio?.reset?.();});
+if(reviewOptIn)reviewOptIn.addEventListener("change",()=>reportReview(reviewEnabled()?"Device-only unanswered-question review enabled. Never enter sensitive details.":"Unanswered-question saving is off."));
+if(reviewClear)reviewClear.addEventListener("click",()=>{try{localStorage.removeItem(pendingKey);reportReview("Saved unanswered questions deleted from this browser.");}catch{reportReview("Browser storage is unavailable; no saved questions could be accessed.");}});
 language.addEventListener("change",()=>append("Pierre",greetings[language.value]||greetings.en));
 const audioStatus=document.getElementById("pierre-audio-status"),voiceProfile=document.getElementById("pierre-voice-profile"),volume=document.getElementById("pierre-volume"),pace=document.getElementById("pierre-pace"),stopVoice=document.getElementById("stop-voice");
 const speechAvailable=("speechSynthesis" in window)&&("SpeechSynthesisUtterance" in window);
