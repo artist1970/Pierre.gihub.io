@@ -136,29 +136,72 @@ clear.addEventListener("click",()=>{log.replaceChildren();append("Pierre",greeti
 if(reviewOptIn)reviewOptIn.addEventListener("change",()=>reportReview(reviewEnabled()?"Device-only unanswered-question review enabled. Never enter sensitive details.":"Unanswered-question saving is off."));
 if(reviewClear)reviewClear.addEventListener("click",()=>{try{localStorage.removeItem(pendingKey);reportReview("Saved unanswered questions deleted from this browser.");}catch{reportReview("Browser storage is unavailable; no saved questions could be accessed.");}});
 language.addEventListener("change",()=>append("Pierre",greetings[language.value]||greetings.en));
-const audioStatus=document.getElementById("pierre-audio-status"),voiceProfile=document.getElementById("pierre-voice-profile"),volume=document.getElementById("pierre-volume"),pace=document.getElementById("pierre-pace"),stopVoice=document.getElementById("stop-voice");
+const audioStatus=document.getElementById("pierre-audio-status"),voiceProfile=document.getElementById("pierre-voice-profile"),voicePicker=document.getElementById("pierre-voice-select"),voicePreview=document.getElementById("pierre-voice-preview"),volume=document.getElementById("pierre-volume"),pace=document.getElementById("pierre-pace"),stopVoice=document.getElementById("stop-voice");
 const speechAvailable=("speechSynthesis" in window)&&("SpeechSynthesisUtterance" in window);
 const PIERRE_VOICE_PROFILE="Arthur-en-GB-device";
 const preferredMaleEnglishVoices=["Arthur","Daniel","Oliver","Ryan","Jamie","Guy","George","Microsoft Ryan Online (Natural)","Microsoft George Online (Natural)","Google UK English Male"];
-let availableVoices=[],pierreVoice=null;
+const voicePreferenceKey="pierre.public.voice-choice.v1";
+const autoVoiceKey="auto";
+const voiceKey=v=>JSON.stringify([v.voiceURI||"",v.name||"",v.lang||"",!!v.localService]);
+let availableVoices=[],pierreVoice=null,chosenVoiceKey=autoVoiceKey;
 function isEnglish(v){return /^en(?:-|_)/i.test(v.lang||"");}
-function refreshVoices(){
- if(!speechAvailable)return;
- availableVoices=window.speechSynthesis.getVoices();
+function setAudioStatus(message){if(audioStatus)audioStatus.textContent=message;}
+try{const stored=window.localStorage?.getItem(voicePreferenceKey);if(stored&&stored.length<500)chosenVoiceKey=stored;}catch{/* Voice preference is optional. */}
+function defaultVoice(){
  const exactArthur=availableVoices.find(v=>v.name==="Arthur"&&/^en-GB$/i.test(v.lang)&&v.localService);
  const ranked=preferredMaleEnglishVoices.map(name=>availableVoices.find(v=>v.name===name&&isEnglish(v))).find(Boolean);
  const localBritish=availableVoices.find(v=>/^en-GB$/i.test(v.lang)&&v.localService);
  const british=availableVoices.find(v=>/^en-GB$/i.test(v.lang));
  const localEnglish=availableVoices.find(v=>isEnglish(v)&&v.localService);
- pierreVoice=exactArthur||ranked||localBritish||british||localEnglish||availableVoices.find(isEnglish)||null;
- if(voiceProfile)voiceProfile.textContent=pierreVoice
-  ?(exactArthur?PIERRE_VOICE_PROFILE:"Arthur fallback · "+pierreVoice.name+" · "+pierreVoice.lang+(pierreVoice.localService?" · device":""))
-  :PIERRE_VOICE_PROFILE+" · browser voice pending";
+ return exactArthur||ranked||localBritish||british||localEnglish||availableVoices.find(isEnglish)||availableVoices[0]||null;
 }
-function selectedVoice(){return pierreVoice;}
-function setAudioStatus(message){if(audioStatus)audioStatus.textContent=message;}
+function selectedVoice(){
+ if(chosenVoiceKey!==autoVoiceKey)return availableVoices.find(v=>voiceKey(v)===chosenVoiceKey)||null;
+ return pierreVoice;
+}
+function voiceLabel(v){return (v.name||"Unnamed voice")+" · "+(v.lang||"unknown language")+(v.localService?" · device":" · browser/service");}
+function updateVoiceStatus(){
+ const manual=chosenVoiceKey!==autoVoiceKey;
+ const v=selectedVoice();
+ if(voiceProfile)voiceProfile.textContent=v?(manual?"Selected: ":"Automatic: ")+voiceLabel(v):(speechAvailable?"No voices available yet; browser default will be used.":"Speech playback is unavailable in this browser.");
+}
+function refreshVoices(){
+ if(!speechAvailable)return;
+ const voices=window.speechSynthesis.getVoices();
+ availableVoices=Array.isArray(voices)?voices.slice():Array.from(voices||[]);
+ pierreVoice=defaultVoice();
+ if(voicePicker){
+  voicePicker.replaceChildren();
+  const option=document.createElement("option");
+  option.value=autoVoiceKey;
+  option.textContent="Automatic · Arthur preferred";
+  voicePicker.append(option);
+  const seen=new Set();
+  for(const v of availableVoices){
+   const key=voiceKey(v);
+   if(seen.has(key))continue;
+   seen.add(key);
+   const item=document.createElement("option");
+   item.value=key;item.textContent=voiceLabel(v);
+   voicePicker.append(item);
+  }
+  if(chosenVoiceKey!==autoVoiceKey&&!seen.has(chosenVoiceKey)){
+   // Keep a prior preference only while the browser is still loading voices.
+   if(availableVoices.length){chosenVoiceKey=autoVoiceKey;setAudioStatus("Your previous voice is unavailable on this device. Automatic voice selection is active.");}
+  }
+  voicePicker.value=chosenVoiceKey;
+ }
+ updateVoiceStatus();
+}
+if(voicePicker)voicePicker.addEventListener("change",()=>{
+ chosenVoiceKey=voicePicker.value||autoVoiceKey;
+ try{window.localStorage?.setItem(voicePreferenceKey,chosenVoiceKey);}catch{/* Preferences can remain session-only. */}
+ updateVoiceStatus();
+ const v=selectedVoice();
+ setAudioStatus(chosenVoiceKey===autoVoiceKey?"Automatic voice selection enabled.":v?"Voice selected: "+voiceLabel(v)+".":"That voice is not available. Choose another voice.");
+});
 if(speechAvailable){refreshVoices();window.speechSynthesis.addEventListener?.("voiceschanged",refreshVoices);}
-else setAudioStatus("Speech playback is unavailable in this browser.");
+else{if(voicePicker)voicePicker.disabled=true;if(voicePreview)voicePreview.disabled=true;updateVoiceStatus();setAudioStatus("Speech playback is unavailable in this browser.");}
 for(const [control,output,format] of [[volume,document.getElementById("pierre-volume-value"),v=>v+"%"],[pace,document.getElementById("pierre-pace-value"),v=>Number(v).toFixed(2)+"×"]]){
  if(control&&output)control.addEventListener("input",()=>{output.textContent=format(control.value);});
 }
@@ -175,18 +218,24 @@ function speakText(text){
  const target=languageFor(text);
  const tags={en:"en-GB",fr:"fr-FR",es:"es-ES",de:"de-DE",zh:"zh-CN",ja:"ja-JP",ar:"ar",ru:"ru-RU"};
  const lang=tags[target]||"en-GB";
- const match=target==="en"?selectedVoice():availableVoices.find(v=>String(v.lang||"").toLowerCase().startsWith(target.toLowerCase()));
- const chosen=match||selectedVoice();
+ const manual=chosenVoiceKey!==autoVoiceKey;
+ const chosen=manual?selectedVoice():(target==="en"?selectedVoice():availableVoices.find(v=>String(v.lang||"").toLowerCase().startsWith(target.toLowerCase()))||selectedVoice());
+ const matchedLanguage=!!chosen&&String(chosen.lang||"").toLowerCase().startsWith(target.toLowerCase());
  const utterance=new SpeechSynthesisUtterance(text);
  if(chosen){utterance.voice=chosen;utterance.lang=chosen.lang;}
  else utterance.lang=lang;
  utterance.volume=volume?Number(volume.value)/100:0.8;
  utterance.rate=pace?Number(pace.value):0.85;
- utterance.onstart=()=>setAudioStatus(match||target==="en"?"Pierre is speaking with "+(chosen?.name||PIERRE_VOICE_PROFILE)+".":"No "+lang+" voice was found. Playing the available fallback voice.");
+ utterance.onstart=()=>setAudioStatus("Pierre is speaking with "+(chosen?.name||"the browser default")+(manual?" (your selected voice)":matchedLanguage?"":" (fallback voice)")+".");
  utterance.onend=()=>setAudioStatus("Playback finished.");
  utterance.onerror=e=>{if(e.error!=="canceled"&&e.error!=="interrupted")setAudioStatus("Pierre's speech playback is unavailable on this device.");};
  window.speechSynthesis.speak(utterance);
 }
+if(voicePreview)voicePreview.addEventListener("click",()=>{
+ const lang=selectedVoice()?.lang?.slice(0,2).toLowerCase()||"en";
+ const sample=greetings[lang]||greetings.en;
+ speakText(sample);
+});
 if(voice)voice.addEventListener("click",()=>{
  const last=[...log.querySelectorAll(".bubble.pierre p")].at(-1);
  if(last)speakText(last.textContent);
