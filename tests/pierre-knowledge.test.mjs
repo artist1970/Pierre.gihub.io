@@ -39,7 +39,7 @@ function boot(data=bank,fetchOK=true){
     const last=log.children.at(-1);
     return last?.children.find(x=>x.tagName==="p")?.textContent;
   };
-  return {ask,status:()=>document.getElementById("pierre-knowledge-status").textContent,queued:()=>JSON.parse(storage.get("pierre.unanswered.review.v1")||"[]")};
+  return {ask,status:()=>document.getElementById("pierre-knowledge-status").textContent,queued:()=>JSON.parse(storage.get("pierre.unanswered.review.v1")||"[]"),enableReview(){document.getElementById("pierre-review-opt-in").checked=true;}};
 }
 
 test("published question bank preserves every approved record and unique ID",()=>{
@@ -62,7 +62,8 @@ test("approved exact questions outrank generic greetings and topic shortcuts",as
   for(const r of bank.records){
     if(seen.has(key(r.question)))continue;
     seen.add(key(r.question));
-    assert.equal(app.ask(r.question),r.answer,r.id);
+    const richest=bank.records.filter(x=>key(x.question)===key(r.question)).sort((a,b)=>b.answer.length-a.answer.length)[0];
+    assert.equal(app.ask(r.question),richest.answer,r.id);
   }
   assert.equal(seen.size,527);
 });
@@ -70,7 +71,7 @@ test("approved exact questions outrank generic greetings and topic shortcuts",as
 test("minor punctuation differences still retrieve approved answers",async()=>{
   const app=boot();
   await new Promise(resolve=>setImmediate(resolve));
-  const first=bank.records.find(x=>key(x.question)===key("What is code-switching?"));
+  const first=bank.records.filter(x=>key(x.question)===key("What is code-switching?")).sort((a,b)=>b.answer.length-a.answer.length)[0];
   assert.ok(first);
   assert.equal(app.ask("WHAT IS CODE-SWITCHING"),first.answer);
 });
@@ -91,6 +92,9 @@ test("failed knowledge fetch enters limited fallback without fake success",async
 test("unknown question reviews remain local and exclude child and URL text",async()=>{
   const app=boot();
   await new Promise(resolve=>setImmediate(resolve));
+  app.ask("Explain a flarbaxian gizmo mechanism");
+  assert.equal(app.queued().length,0,"saving must be off by default");
+  app.enableReview();
   app.ask("Explain a flarbaxian gizmo mechanism");
   assert.equal(app.queued().length,1);
   app.ask("My child asked about a flarbaxian gizmo mechanism");
