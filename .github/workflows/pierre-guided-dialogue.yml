@@ -1,0 +1,27 @@
+name: Pierre guided dialogue regression
+on:
+  pull_request:
+    paths:
+      - 'pierre-guided-dialogue-v1.js'
+      - 'pierre-conversation-v1.js'
+      - 'index.html'
+      - 'tests/pierre-guided-dialogue.test.mjs'
+      - '.github/workflows/pierre-guided-dialogue.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'pierre-guided-dialogue-v1.js'
+      - 'pierre-conversation-v1.js'
+      - 'index.html'
+      - 'tests/pierre-guided-dialogue.test.mjs'
+permissions:
+  contents: read
+jobs:
+  guided-conversation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/pierre-guided-dialogue.test.mjs tests/pierre-chat-integration.test.mjs
