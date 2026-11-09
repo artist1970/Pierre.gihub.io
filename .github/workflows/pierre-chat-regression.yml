@@ -1,0 +1,27 @@
+name: Pierre public chat regression
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'pierre-conversation-v1.js'
+      - 'knowledge/public-qa.v1.json'
+      - 'tests/pierre-chat-integration.test.mjs'
+      - '.github/workflows/pierre-chat-regression.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'pierre-conversation-v1.js'
+      - 'knowledge/public-qa.v1.json'
+      - 'tests/pierre-chat-integration.test.mjs'
+permissions:
+  contents: read
+jobs:
+  public-chat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/pierre-chat-integration.test.mjs tests/pierre-monte-carlo-qa.test.mjs
