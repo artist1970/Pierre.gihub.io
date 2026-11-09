@@ -1,0 +1,25 @@
+name: Pierre full browser voice selector regression
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'pierre-conversation-v1.js'
+      - 'tests/pierre-full-voice-picker.test.mjs'
+      - '.github/workflows/pierre-voice-picker.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'pierre-conversation-v1.js'
+      - 'tests/pierre-full-voice-picker.test.mjs'
+permissions:
+  contents: read
+jobs:
+  voice-picker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/pierre-full-voice-picker.test.mjs tests/pierre-chat-integration.test.mjs
