@@ -57,7 +57,10 @@ const grammarHelp=window.PierreGrammarGuide?.explain(raw);
 if(grammarHelp!==null&&grammarHelp!==undefined)return grammarHelp;
 // Exact approved answers take precedence over generic topic prompts.
 const direct=records.find(r=>questionKey(r.question)===questionKey(s));if(direct){lastTopic=topicKey(direct.topic);lastRecordId=direct.id;return direct.answer;}
-// Randomized practice is session-only and must not override exact approved answers.
+// Context-aware, scaffolded dialogue uses only original prompts and session state.
+ const guided=window.PierreGuidedDialogue?.handle(raw);
+ if(guided)return guided;
+ // Randomized practice is session-only and must not override exact approved answers.
 const monteCarlo=window.PierreMonteCarloQA?.handle(raw,records,window.PierreDictionary);
 if(monteCarlo)return monteCarlo;
 // Guided conversation and varied practice use only reviewed public words.
@@ -129,7 +132,7 @@ return fallback;}
 function append(who,text){const div=document.createElement("div");div.className="bubble "+(who==="You"?"you":"pierre");const b=document.createElement("span");b.className="speaker";b.textContent=who;const p=document.createElement("p");p.textContent=text;div.append(b,p);if(who!=="You"){const play=document.createElement("button");play.type="button";play.textContent="Listen to this reply";play.ariaLabel="Listen to Pierre's reply";play.style.cssText="margin-top:9px;padding:7px 12px;font:inherit;font-size:16px;border:1px solid #bdab83;background:transparent;color:#fffaf0;cursor:pointer";play.addEventListener("click",()=>speakText(text));div.append(play);}log.append(div);log.scrollTop=log.scrollHeight;}
 function submit(){const q=input.value.trim();if(!q)return;const reply=answer(q);append("You",q);append("Pierre",reply);if(reply===fallback&&status==="ready")queueUnanswered(q);input.value="";input.focus();}
 send.addEventListener("click",submit);input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});
-clear.addEventListener("click",()=>{log.replaceChildren();append("Pierre",greetings[language.value]||greetings.en);input.value="";lastTopic="";lastRecordId="";window.PierreMonteCarloQA?.reset?.();window.PierrePracticeStudio?.reset?.();});
+clear.addEventListener("click",()=>{log.replaceChildren();append("Pierre",greetings[language.value]||greetings.en);input.value="";lastTopic="";lastRecordId="";window.PierreMonteCarloQA?.reset?.();window.PierrePracticeStudio?.reset?.();window.PierreGuidedDialogue?.reset?.();});
 if(reviewOptIn)reviewOptIn.addEventListener("change",()=>reportReview(reviewEnabled()?"Device-only unanswered-question review enabled. Never enter sensitive details.":"Unanswered-question saving is off."));
 if(reviewClear)reviewClear.addEventListener("click",()=>{try{localStorage.removeItem(pendingKey);reportReview("Saved unanswered questions deleted from this browser.");}catch{reportReview("Browser storage is unavailable; no saved questions could be accessed.");}});
 language.addEventListener("change",()=>append("Pierre",greetings[language.value]||greetings.en));
