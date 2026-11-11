@@ -8,6 +8,7 @@ on:
       - "pierre-monte-carlo-qa-v1.js"
       - "pierre-grammar-guide-v1.js"
       - "pierre-dictionary-adapter-v1.js"
+      - "creative-spark-mentor-language-v1.js"
       - "knowledge/**"
       - "tests/**"
       - ".github/workflows/pierre-language-regression.yml"
@@ -19,6 +20,7 @@ on:
       - "pierre-monte-carlo-qa-v1.js"
       - "pierre-grammar-guide-v1.js"
       - "pierre-dictionary-adapter-v1.js"
+      - "creative-spark-mentor-language-v1.js"
       - "knowledge/**"
       - "tests/**"
   workflow_dispatch:
