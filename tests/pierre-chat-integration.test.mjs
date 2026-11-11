@@ -65,6 +65,7 @@ test('approved answers remain unique, and follow-ups stay in topic without repea
  a.submit('tell me more');
  const another=lines(a).at(-1).text;
  assert.notEqual(another,follow);
+ assert.ok(!another.includes('Would you like another related question?') || another.length>30);
 });
 test('Clear resets conversation and topic context',async()=>{
  const a=await boot();
