@@ -56,6 +56,13 @@ fetch("knowledge/public-qa.v1.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw 
 function answer(raw){const s=normalize(raw).slice(0,1200);if(!s)return "Write a question or select a language above.";
 // Guard credentials before content retrieval and heuristic routing.
 if(/(password|api key|secret|private student|account credential)/i.test(s))return "Please do not share private records or credentials here. I can help with a general language question without personal details.";
+// Shared Creative Spark public language interface is opt-in and bounded.
+const shared=window.CreativeSparkMentorLanguage;
+const sharedGrammar=String(raw).match(/^(?:check|review|help with)(?: my)? grammar\s*[:—-]\s*(.{4,1000})$/i);
+if(sharedGrammar){
+ const notes=shared?.grammar(sharedGrammar[1],{mentorId:"pierre"})?.notes;
+ return notes?.length?notes.join(" "):"My basic grammar checks found no flagged pattern. For a fuller review, share a specific sentence and what you want to improve.";
+}
 // Grammar feedback is opt-in and advisory. Never rewrite a learner's message.
 const grammarHelp=window.PierreGrammarGuide?.explain(raw);
 if(grammarHelp!==null&&grammarHelp!==undefined)return grammarHelp;
