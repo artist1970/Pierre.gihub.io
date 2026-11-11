@@ -35,8 +35,8 @@ test("topic draw uses approved questions and does not repeat before exhaustion",
  assert.match(ask("stop quiz"),/No learner answers were uploaded or saved/);
  assert.equal(engine.stats,null);
 });
-test("all 530 published source Q&A records and dictionary words are preserved",()=>{
- assert.equal(qa.records.length,530);
+test("all 527 distinct published Q&A records and dictionary words are preserved",()=>{
+ assert.equal(qa.records.length,527);
  assert.equal(approvedDictionary.entries.length,6);
  const {engine,ask}=boot();
  assert.match(ask("monte carlo q&a"),/Question 1/);
