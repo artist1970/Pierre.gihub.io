@@ -37,13 +37,17 @@ const knowledgeStatus=document.getElementById("pierre-knowledge-status");
 if(window.PierreDictionary)window.PierreDictionary.init(window.PIERRE_PUBLIC_DICTIONARY_URL||"");
 function showKnowledgeStatus(message){if(knowledgeStatus)knowledgeStatus.textContent=message;}
 fetch("knowledge/public-qa.v1.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw Error("index");return r.json()}).then(d=>{
- if(d.schema!=="pierre-public-knowledge-v1"||d.mentorId!=="pierre"||!Array.isArray(d.records)||d.records.length>5000)throw Error("schema");
- const best=new Map();
+ if(d.schema!=="pierre-public-knowledge-v1"||d.mentorId!=="pierre"||!Array.isArray(d.records)||d.records.length===0||d.records.length>5000)throw Error("schema");
+ // Reject the entire publication on corrupt/unsigned editorial state. Never show a partial bank.
+ const best=new Map(),ids=new Set();
  for(const x of d.records){
-  if(x.status!=="approved-public-seed"||typeof x.question!=="string"||typeof x.answer!=="string"||!x.answer.trim())continue;
+  if(!x||x.status!=="approved-public-seed"||typeof x.id!=="string"||!/^pierre-public-[0-9]{3,4}$/.test(x.id)||ids.has(x.id)||
+     typeof x.topic!=="string"||!x.topic.trim()||typeof x.question!=="string"||!x.question.trim()||x.question.length>350||
+     typeof x.answer!=="string"||!x.answer.trim()||x.answer.length>3500)throw Error("invalid published record");
+  ids.add(x.id);
   const key=questionKey(x.question);
-  const old=best.get(key);
-  if(!old||x.answer.length>old.answer.length)best.set(key,x);
+  const previous=best.get(key);
+  if(!previous||x.answer.length>previous.answer.length)best.set(key,x);
  }
  records=[...best.values()];
  status="ready";
