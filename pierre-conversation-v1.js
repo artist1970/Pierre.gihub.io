@@ -4,7 +4,7 @@ const input=document.getElementById("message"), send=document.getElementById("se
 if(!input||!send||!log)return;
 let records=[],status="loading";
 let activeLanguage="";
-let lastTopic="",lastRecordId="";
+let lastTopic="",lastRecordId="",recentTopicIds=[];
 const reviewOptIn=document.getElementById("pierre-review-opt-in"),reviewClear=document.getElementById("pierre-review-clear"),reviewStatus=document.getElementById("pierre-review-status");
 const reviewEnabled=()=>reviewOptIn?.checked===true;
 function reportReview(text){if(reviewStatus)reviewStatus.textContent=text;}
@@ -56,7 +56,7 @@ if(/(password|api key|secret|private student|account credential)/i.test(s))retur
 const grammarHelp=window.PierreGrammarGuide?.explain(raw);
 if(grammarHelp!==null&&grammarHelp!==undefined)return grammarHelp;
 // Exact approved answers take precedence over generic topic prompts.
-const direct=records.find(r=>questionKey(r.question)===questionKey(s));if(direct){lastTopic=topicKey(direct.topic);lastRecordId=direct.id;return direct.answer;}
+const direct=records.find(r=>questionKey(r.question)===questionKey(s));if(direct){lastTopic=topicKey(direct.topic);lastRecordId=direct.id;recentTopicIds=[direct.id];return direct.answer;}
 // Context-aware, scaffolded dialogue uses only original prompts and session state.
  const guided=window.PierreGuidedDialogue?.handle(raw);
  if(guided)return guided;
@@ -68,9 +68,15 @@ const practiceResponse=window.PierrePracticeStudio?.handle(raw,window.PierreDict
 if(practiceResponse)return practiceResponse;
 // Session-only approved follow-up: no invented knowledge or remote learner context.
  if(/^(?:tell me more|continue this topic|another example|more about that|what else about that)[?.!]*$/.test(s)&&lastTopic){
-  const next=records.find(r=>topicKey(r.topic)===lastTopic&&r.id!==lastRecordId);
-  if(next){lastRecordId=next.id;return next.answer+" Would you like another related question?";}
-  return "That is the end of my approved examples for this topic. Which aspect would you like to explore?";
+  // Cycle through unused, reviewed examples in the same topic before repeating.
+  const sameTopic=records.filter(r=>topicKey(r.topic)===lastTopic);
+  const unseen=sameTopic.find(r=>!recentTopicIds.includes(r.id));
+  if(unseen){
+    recentTopicIds.push(unseen.id);
+    lastRecordId=unseen.id;
+    return unseen.answer+" Would you like another related question?";
+  }
+  return "We've explored the approved examples I have for this topic. Would you like to revisit one or choose another aspect?";
  }
  // Compose new instructional sentences from approved public content only.
 const composed=window.PierreLanguageComposer?.respond(raw,records,window.PierreDictionary);
@@ -126,13 +132,13 @@ if(s.includes("thank"))return "You're welcome. Languages reward curiosity and re
 const tokens=x=>normalize(x).replace(/[^\p{L}\p{N}]+/gu," ").split(/\s+/).filter(w=>w.length>2&&!["the","and","you","your","can","how","what","why","does","are","for","with","should","this","that","about","from","into","have","learn"].includes(w));
 const words=new Set(tokens(s));let best=null,bestScore=0;
 for(const r of records){const terms=[...new Set(tokens(r.question))];const common=terms.filter(t=>words.has(t)).length;const ratio=common/Math.max(terms.length,words.size,1);const score=common*2+ratio*3;if(common>=2&&ratio>=0.55&&score>bestScore){best=r;bestScore=score;}}
-if(best&&bestScore>=5){lastTopic=topicKey(best.topic);lastRecordId=best.id;return best.answer;}
+if(best&&bestScore>=5){lastTopic=topicKey(best.topic);lastRecordId=best.id;recentTopicIds=[best.id];return best.answer;}
 const topic=Object.keys(topics).find(t=>topics[t].some(k=>s.includes(normalize(k))));if(topic){lastTopic=topicKey(topic);const candidates=records.filter(x=>topicKey(x.topic)===topicKey(topic));if(candidates.length===1)return candidates[0].answer;return "I'd be glad to explore "+topic+" with you. Are you interested in pronunciation, grammar, vocabulary, conversation, or a specific example?";}
 return fallback;}
 function append(who,text){const div=document.createElement("div");div.className="bubble "+(who==="You"?"you":"pierre");const b=document.createElement("span");b.className="speaker";b.textContent=who;const p=document.createElement("p");p.textContent=text;div.append(b,p);if(who!=="You"){const play=document.createElement("button");play.type="button";play.textContent="Listen to this reply";play.ariaLabel="Listen to Pierre's reply";play.style.cssText="margin-top:9px;padding:7px 12px;font:inherit;font-size:16px;border:1px solid #bdab83;background:transparent;color:#fffaf0;cursor:pointer";play.addEventListener("click",()=>speakText(text));div.append(play);}log.append(div);log.scrollTop=log.scrollHeight;}
 function submit(){const q=input.value.trim();if(!q)return;const reply=answer(q);append("You",q);append("Pierre",reply);if(reply===fallback&&status==="ready")queueUnanswered(q);input.value="";input.focus();}
 send.addEventListener("click",submit);input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});
-clear.addEventListener("click",()=>{log.replaceChildren();append("Pierre",greetings[language.value]||greetings.en);input.value="";lastTopic="";lastRecordId="";window.PierreMonteCarloQA?.reset?.();window.PierrePracticeStudio?.reset?.();window.PierreGuidedDialogue?.reset?.();});
+clear.addEventListener("click",()=>{log.replaceChildren();append("Pierre",greetings[language.value]||greetings.en);input.value="";lastTopic="";lastRecordId="";recentTopicIds=[];window.PierreMonteCarloQA?.reset?.();window.PierrePracticeStudio?.reset?.();window.PierreGuidedDialogue?.reset?.();});
 if(reviewOptIn)reviewOptIn.addEventListener("change",()=>reportReview(reviewEnabled()?"Device-only unanswered-question review enabled. Never enter sensitive details.":"Unanswered-question saving is off."));
 if(reviewClear)reviewClear.addEventListener("click",()=>{try{localStorage.removeItem(pendingKey);reportReview("Saved unanswered questions deleted from this browser.");}catch{reportReview("Browser storage is unavailable; no saved questions could be accessed.");}});
 language.addEventListener("change",()=>append("Pierre",greetings[language.value]||greetings.en));
