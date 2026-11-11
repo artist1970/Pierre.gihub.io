@@ -54,15 +54,17 @@ test('privacy default never queues unanswered questions; opt-in can erase',async
  a.get('pierre-review-clear').handlers.click();
  assert.equal(a.data.has('pierre.unanswered.review.v1'),false);
 });
-test('duplicate questions select richest approved answer, and follow-up stays in topic',async()=>{
- const a=await boot(),records=bank.records.filter(x=>x.question==='What is code-switching?');
- const expected=records.sort((x,y)=>y.answer.length-x.answer.length)[0];
+test('approved answers remain unique, and follow-ups stay in topic without repeating',async()=>{
+ const a=await boot(),expected=bank.records.find(x=>x.question==='What is code-switching?');
  a.submit('What is code-switching?');
  assert.equal(lines(a).at(-1).text,expected.answer);
  a.submit('tell me more');
  const follow=lines(a).at(-1).text;
  assert.notEqual(follow,expected.answer);
  assert.ok(follow.length>35);
+ a.submit('tell me more');
+ const another=lines(a).at(-1).text;
+ assert.notEqual(another,follow);
 });
 test('Clear resets conversation and topic context',async()=>{
  const a=await boot();
