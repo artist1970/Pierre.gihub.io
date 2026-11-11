@@ -16,14 +16,14 @@ function elem(tag='div'){
   querySelectorAll(selector){return selector==='.bubble.pierre p'?this.children.filter(x=>x.className?.includes('pierre')).map(x=>x.children.find(c=>c.tag==='p')).filter(Boolean):[];}
  };
 }
-async function boot(){
+async function boot({shared=null}={}){
  const names=['message','send','clear','conversation','language','voice','pierre-knowledge-status','pierre-review-opt-in','pierre-review-clear','pierre-review-status','pierre-audio-status','pierre-voice-profile','pierre-volume','pierre-pace','stop-voice','pierre-volume-value','pierre-pace-value'];
  const els=new Map(names.map(id=>[id,elem()]));
  els.get('language').value='en';els.get('pierre-volume').value='80';els.get('pierre-pace').value='0.85';
  const data=new Map();
  const localStorage={getItem:key=>data.get(key)??null,setItem:(k,v)=>data.set(k,v),removeItem:k=>data.delete(k)};
  const document={getElementById:id=>els.get(id)||null,createElement:elem};
- const window={};
+ const window={};if(shared)window.CreativeSparkMentorLanguage=shared;
  const context={window,document,fetch:async()=>({ok:true,json:async()=>bank}),localStorage};
  vm.runInNewContext(code,context,{timeout:1000});
  await new Promise(resolve=>setImmediate(resolve));
@@ -88,4 +88,21 @@ test('Enter triggers send and Shift+Enter leaves newline available',async()=>{
  prevented=false;
  input.handlers.keydown({key:'Enter',shiftKey:true,preventDefault(){prevented=true;}});
  assert.equal(prevented,false);
+});
+
+test("Pierre consults shared approved lookup and advisory grammar, never private CORE",async()=>{
+ const events=[];
+ const shared={
+  grammar:(text,opts)=>{events.push({text,opts});return {advisory:true,notes:["Check the article before the vowel sound."]};},
+  lookup:(word,opts)=>{events.push({word,opts});return word==="abacus"?"abacus: A reviewed counting device.":null;}
+ };
+ const a=await boot({shared});
+ a.submit("check grammar: I saw a apple");
+ assert.match(lines(a).at(-1).text,/Check the article/);
+ a.submit("define abacus");
+ assert.match(lines(a).at(-1).text,/reviewed counting device/);
+ assert.equal(events[0].opts.mentorId,"pierre");
+ assert.equal(events[1].opts.mentorId,"pierre");
+ a.submit("please give me account credential");
+ assert.match(lines(a).at(-1).text,/do not share private records or credentials/);
 });
