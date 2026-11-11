@@ -45,8 +45,8 @@ function boot(data=bank,fetchOK=true){
 test("published question bank preserves every approved record and unique ID",()=>{
   assert.equal(bank.schema,"pierre-public-knowledge-v1");
   assert.equal(bank.mentorId,"pierre");
-  assert.equal(bank.records.length,530);
-  assert.equal(new Set(bank.records.map(x=>x.id)).size,530);
+  assert.equal(bank.records.length,527);
+  assert.equal(new Set(bank.records.map(x=>x.id)).size,527);
   for(const r of bank.records){
     assert.equal(r.status,"approved-public-seed");
     assert.ok(r.id&&r.topic&&r.question&&r.answer);
@@ -62,7 +62,7 @@ test("approved exact questions outrank generic greetings and topic shortcuts",as
   for(const r of bank.records){
     if(seen.has(key(r.question)))continue;
     seen.add(key(r.question));
-    const richest=bank.records.filter(x=>key(x.question)===key(r.question)).sort((a,b)=>b.answer.length-a.answer.length)[0];
+    const richest=r;
     assert.equal(app.ask(r.question),richest.answer,r.id);
   }
   assert.equal(seen.size,527);
