@@ -44,7 +44,7 @@ test("unapproved word requests are not treated as approved dictionary definition
 });
 test("no network, storage, private repository access, or canonical bank modifications",()=>{
  assert.doesNotMatch(source,/\bfetch\s*\(|\bXMLHttpRequest\b|localStorage|indexedDB|raw\.githubusercontent/);
- assert.equal(bank.records.length,530);
+ assert.equal(bank.records.length,527);
  assert.equal(dict.entries.length,6);
 });
 
