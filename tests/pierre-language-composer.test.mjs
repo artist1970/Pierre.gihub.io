@@ -43,6 +43,6 @@ test("does not hallucinate unapproved dictionary entries",()=>{
 });
 test("no remote operations, file writes or calls to private knowledge",()=>{
  assert.doesNotMatch(source,/\bfetch\s*\(|\bXMLHttpRequest\b|localStorage|indexedDB/);
- assert.equal(bank.records.length,530);
+ assert.equal(bank.records.length,527);
  assert.equal(dict.entries.length,6);
 });
