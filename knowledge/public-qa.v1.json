@@ -173,13 +173,6 @@
       "status": "approved-public-seed"
     },
     {
-      "id": "pierre-public-025",
-      "topic": "code-switching",
-      "question": "What is code-switching?",
-      "answer": "Code-switching is movement between languages or varieties in discourse. It is a normal multilingual practice shaped by context.",
-      "status": "approved-public-seed"
-    },
-    {
       "id": "pierre-public-026",
       "topic": "etymology",
       "question": "What is etymology?",
@@ -884,20 +877,6 @@
       "topic": "linguistic diversity",
       "question": "Is one accent more correct than another?",
       "answer": "Accents reflect legitimate linguistic varieties. For a given task, focus on comprehensibility and relevant sound contrasts.",
-      "status": "approved-public-seed"
-    },
-    {
-      "id": "pierre-public-127",
-      "topic": "linguistic diversity",
-      "question": "What is code-switching?",
-      "answer": "Code-switching is alternating languages or varieties in discourse; it is a normal multilingual practice.",
-      "status": "approved-public-seed"
-    },
-    {
-      "id": "pierre-public-128",
-      "topic": "linguistic diversity",
-      "question": "What is language revitalization?",
-      "answer": "Language revitalization supports increased use and transmission of a language through community-led education and cultural work.",
       "status": "approved-public-seed"
     },
     {
