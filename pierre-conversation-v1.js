@@ -146,7 +146,7 @@ for(const r of records){const terms=[...new Set(tokens(r.question))];const commo
 if(best&&bestScore>=5){lastTopic=topicKey(best.topic);lastRecordId=best.id;recentTopicIds=[best.id];return best.answer;}
 const topic=Object.keys(topics).find(t=>topics[t].some(k=>s.includes(normalize(k))));if(topic){lastTopic=topicKey(topic);const candidates=records.filter(x=>topicKey(x.topic)===topicKey(topic));if(candidates.length===1)return candidates[0].answer;return "I'd be glad to explore "+topic+" with you. Are you interested in pronunciation, grammar, vocabulary, conversation, or a specific example?";}
 return fallback;}
-function append(who,text){const div=document.createElement("div");div.className="bubble "+(who==="You"?"you":"pierre");const b=document.createElement("span");b.className="speaker";b.textContent=who;const p=document.createElement("p");p.textContent=text;div.append(b,p);if(who!=="You"){const play=document.createElement("button");play.type="button";play.textContent="Listen to this reply";play.ariaLabel="Listen to Pierre's reply";play.style.cssText="margin-top:9px;padding:7px 12px;font:inherit;font-size:16px;border:1px solid #bdab83;background:transparent;color:#fffaf0;cursor:pointer";play.addEventListener("click",()=>speakText(text));div.append(play);}log.append(div);log.scrollTop=log.scrollHeight;}
+function append(who,text){const div=document.createElement("div");div.className="bubble "+(who==="You"?"you":"pierre");const b=document.createElement("span");b.className="speaker";b.textContent=who;const p=document.createElement("p");p.textContent=text;div.append(b,p);if(who!=="You"){const play=document.createElement("button");play.type="button";play.textContent="Listen to this reply";play.ariaLabel="Listen to Pierre's reply";play.style.cssText="margin-top:9px;padding:7px 12px;font:inherit;font-size:16px;border:1px solid #bdab83;background:transparent;color:#fffaf0;cursor:pointer";play.addEventListener("click",()=>speakText(text));div.append(play);}log.append(div);log.scrollTop=log.scrollHeight;if(who==="Pierre"&&autoNarration&&speechAvailable&&log.children.length>1)speakText(text);}
 function submit(){const q=input.value.trim();if(!q)return;const reply=answer(q);append("You",q);append("Pierre",reply);if(reply===fallback&&status==="ready")queueUnanswered(q);input.value="";input.focus();}
 send.addEventListener("click",submit);input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});
 clear.addEventListener("click",()=>{log.replaceChildren();append("Pierre",greetings[language.value]||greetings.en);input.value="";lastTopic="";lastRecordId="";recentTopicIds=[];window.PierreMonteCarloQA?.reset?.();window.PierrePracticeStudio?.reset?.();window.PierreGuidedDialogue?.reset?.();});
@@ -158,6 +158,15 @@ const speechAvailable=("speechSynthesis" in window)&&("SpeechSynthesisUtterance"
 const PIERRE_VOICE_PROFILE="Arthur-en-GB-device";
 const preferredMaleEnglishVoices=["Arthur","Daniel","Oliver","Ryan","Jamie","Guy","George","Microsoft Ryan Online (Natural)","Microsoft George Online (Natural)","Google UK English Male"];
 const voicePreferenceKey="pierre.public.voice-choice.v1";
+const autoNarrationKey="pierre.public.voice-auto.v1";
+const autoNarrationButton=document.getElementById("voice-auto-toggle");
+let autoNarration=false;
+try{autoNarration=window.localStorage?.getItem(autoNarrationKey)==="on";}catch{}
+function showAutoNarration(){
+ if(!autoNarrationButton)return;
+ autoNarrationButton.textContent=autoNarration?"Voice On":"Voice Off";
+ autoNarrationButton.setAttribute("aria-pressed",String(autoNarration));
+}
 const autoVoiceKey="auto";
 const voiceKey=v=>JSON.stringify([v.voiceURI||"",v.name||"",v.lang||"",!!v.localService]);
 let availableVoices=[],pierreVoice=null,chosenVoiceKey=autoVoiceKey;
@@ -247,6 +256,18 @@ function speakText(text){
  utterance.onend=()=>setAudioStatus("Playback finished.");
  utterance.onerror=e=>{if(e.error!=="canceled"&&e.error!=="interrupted")setAudioStatus("Pierre's speech playback is unavailable on this device.");};
  window.speechSynthesis.speak(utterance);
+}
+showAutoNarration();
+if(autoNarrationButton){
+ autoNarrationButton.disabled=!speechAvailable;
+ autoNarrationButton.addEventListener("click",()=>{
+  if(!speechAvailable)return;
+  autoNarration=!autoNarration;
+  try{window.localStorage?.setItem(autoNarrationKey,autoNarration?"on":"off");}catch{}
+  if(!autoNarration)window.speechSynthesis.cancel();
+  showAutoNarration();
+  setAudioStatus(autoNarration?"Automatic narration enabled for new replies.":"Automatic narration off; manual replay remains available.");
+ });
 }
 if(voicePreview)voicePreview.addEventListener("click",()=>{
  const lang=selectedVoice()?.lang?.slice(0,2).toLowerCase()||"en";
