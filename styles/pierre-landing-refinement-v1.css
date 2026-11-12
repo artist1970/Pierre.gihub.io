@@ -1,0 +1,43 @@
+/* Pierre · VNV/KA canonical aesthetic refinement v1.
+   Formal linguistic study with emerald, ink, gold and parchment. */
+:root{--dark:#142022;--charcoal:#202724;--green:#21473c;--gold:#ddc28a;--paper:#f5f0e5;--cream:#fff8e9;--font:"Nunito","Brandon Grotesque","Avenir Next",Arial,sans-serif}
+body{font:400 18px/1.7 var(--font);background:linear-gradient(180deg,#13272a,#101c21)}
+main{font-size:18px;line-height:1.7}
+h1,h2,h3,.brand{font-family:"Cinzel",Georgia,serif;font-weight:400}
+.hero{padding:clamp(62px,7vw,90px) 0 clamp(58px,6vw,80px);background:radial-gradient(circle at 80% 20%,rgba(38,101,83,.50),transparent 42%),linear-gradient(145deg,#17302f,#111c24)}
+.hero .wrap{max-width:980px;text-align:center}
+.hero .eyebrow{font:400 clamp(18px,2.8vw,33px)/1.35 "Cinzel",Georgia,serif;letter-spacing:.035em;color:#f1dca8;text-transform:none}
+.hero h1{font:400 clamp(48px,7vw,66px)/1.2 "Cinzel",Georgia,serif;letter-spacing:.025em;margin:16px 0;color:#fff8e9}
+.hero p{margin-inline:auto;max-width:800px;font-size:18px;line-height:1.75;color:#fff8e9}
+.hero-actions{display:flex;justify-content:center;align-items:stretch;gap:12px;flex-wrap:wrap;margin-top:30px}
+.hero-actions .btn{flex:0 1 auto;min-width:170px;max-width:100%}
+.btn,.chat-buttons button{background:#202724;color:#fff8e9;border:1px solid #ddc28a;font-weight:400;text-align:center}
+.btn.alt,.chat-buttons .secondary{background:transparent;color:#fff8e9;border-color:#c6ae79}
+.btn:hover,.chat-buttons button:hover{background:#334238;color:#fff8e9}
+.section{padding:clamp(44px,6vw,74px) 0}
+.section h2{font:400 clamp(30px,4vw,44px)/1.3 "Cinzel",Georgia,serif}
+.tile h3,.side-panel h3{font:400 clamp(22px,2.5vw,33px)/1.35 "Cinzel",Georgia,serif}
+.eyebrow{font-size:18px;letter-spacing:.075em}
+main :is(.eyebrow,.kicker){font-size:18px}
+main :is(p,li,label,input,textarea,select,button,a,small,.note,.bubble .speaker){font-size:16px;line-height:1.6}
+main :is(.tile,.chat-panel,.side-panel,.bubble,.tour-invitation,.btn,button,input,textarea,select){border-radius:7px}
+.tile,.chat-panel,.side-panel{min-width:0}
+.tile{display:flex;flex-direction:column;background:#fffaf0;border:1px solid #ae9665;padding:24px}
+.tile p{color:#24352f}
+.grid{align-items:stretch;gap:18px}
+.chat-shell{grid-template-columns:minmax(0,1fr) minmax(220px,255px);gap:18px}
+.chat-panel,.side-panel{background:#203232;border:1px solid #a68d60}
+.conversation{min-height:310px;height:min(48vh,420px)}
+.bubble{border:1px solid #7f9385;padding:14px 16px;max-width:95%}
+.bubble.you{background:#38544b}
+.bubble .speaker{font-weight:400;color:#f3d99f}
+.chat-control textarea{background:#101d20;color:#fff8e9;border:1px solid #aaad97}
+.chat-buttons button{min-height:44px}
+.note,.side-panel p{color:#e6e8dd}
+.tour-invitation{border-radius:0;background:#f5f0e5;border-block:2px solid #ddc28a;color:#202724}
+.tour-invitation .eyebrow{color:#465a4b}
+.tour-invitation h2{font:400 clamp(28px,3.5vw,44px)/1.3 "Cinzel",Georgia,serif}
+.tour-invitation .btn{background:#202724;color:#fff8e9}
+footer{background:#202724;color:#fff8e9;text-align:center;font:400 16px/1.7 var(--font)}
+@media(max-width:820px){.chat-shell{grid-template-columns:1fr}.hero-actions{gap:10px}}
+@media(max-width:560px){.hero{padding:54px 0}.hero-actions{flex-direction:column}.hero-actions .btn{width:100%}.tile{padding:20px}}
