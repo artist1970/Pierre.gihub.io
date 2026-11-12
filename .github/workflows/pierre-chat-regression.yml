@@ -4,6 +4,8 @@ on:
     paths:
       - 'index.html'
       - 'pierre-conversation-v1.js'
+      - 'creative-spark-mentor-qa-v1.js'
+      - 'tests/mentor-qa-federation-integration.test.mjs'
       - 'knowledge/public-qa.v1.json'
       - 'tests/pierre-chat-integration.test.mjs'
       - '.github/workflows/pierre-chat-regression.yml'
@@ -24,4 +26,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tests/pierre-chat-integration.test.mjs tests/pierre-monte-carlo-qa.test.mjs
+      - run: node --test tests/pierre-chat-integration.test.mjs tests/pierre-monte-carlo-qa.test.mjs tests/mentor-qa-federation-integration.test.mjs
