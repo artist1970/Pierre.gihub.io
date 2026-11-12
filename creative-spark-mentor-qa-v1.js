@@ -1,39 +1,44 @@
 /* Creative Spark · approved public mentor Q&A federation v1.
  * One reviewed source index; no duplicated private CORE, no user text transport.
- * The four known GitHub Pages resources are fetched as static documents ONLY.
+ * The nine known GitHub Pages resources are fetched as static documents ONLY.
  * Mentor responses remain mentor-owned; foreign results are attributed as references.
  */
 (function(root){"use strict";
- if(root.CreativeSparkMentorQA?.version==="1.0.0")return;
+ if(root.CreativeSparkMentorQA?.version==="1.1.0")return;
  const BASE="https://artist1970.github.io/";
  const SPECS=Object.freeze([
   {id:"eiren",schema:"vnv-mentor-public-qa-v1",field:"reviewStatus",approved:"approved",count:60,url:BASE+"Eiren.github.io/knowledge/public-qa.v1.json"},
   {id:"pierre",schema:"pierre-public-knowledge-v1",field:"status",approved:"approved-public-seed",count:527,url:BASE+"Pierre.gihub.io/knowledge/public-qa.v1.json"},
   {id:"archaemenes",schema:"archaemenes-question-collection-v1",field:"status",approved:"approved",count:140,url:BASE+"Archaemenes.github.io/knowledge/question-records.json"},
-  {id:"zelle",schema:"zelle-question-collection-v1",field:"status",approved:"approved",count:500,url:BASE+"Zelle.github.io/knowledge/question-records.json"}
+  {id:"zelle",schema:"zelle-question-collection-v1",field:"status",approved:"approved",count:500,url:BASE+"Zelle.github.io/knowledge/question-records.json"},
+  {id:"moirai",schema:"moirai-public-qa-v1",field:"status",approved:"approved",answerField:"response",count:20,url:BASE+"Moirai.github.io/knowledge/question-records.v1.json"},
+  {id:"aurora",schema:"aurora-public-qa-v1",field:"status",approved:"approved",answerField:"response",count:18,url:BASE+"Aurora.github.io/knowledge/question-records.v1.json"},
+  {id:"hope",schema:"hope-public-qa-v1",field:"status",approved:"approved",answerField:"response",count:20,url:BASE+"Hope.github.io/knowledge/question-records.v1.json"},
+  {id:"naib",schema:"naib-public-guidance-v1",field:"status",approved:"approved-public",answerField:"response",count:18,url:BASE+"NAIB.github.io/knowledge/public-guidance.v1.json"},
+  {id:"auren",schema:"auren-public-knowledge-v1",field:"status",approved:"approved-public-seed",topicField:"category",privacy:"public-only",count:51,url:BASE+"Auren.github.io/knowledge/public-qa.v1.json"}
  ]);
- const names={eiren:"Eiren",pierre:"Pierre",archaemenes:"Archaemenes",zelle:"Zelle",hope:"Hope",moirai:"Moirai",aurora:"Aurora",arshif:"ARSHIF",naib:"NAIB"};
+ const names={eiren:"Eiren",pierre:"Pierre",archaemenes:"Archaemenes",zelle:"Zelle",hope:"Hope",moirai:"Moirai",aurora:"Aurora",arshif:"ARSHIF",naib:"NAIB",auren:"Auren"};
  const stop=new Set(["how","what","why","when","where","which","this","that","with","from","your","you","are","the","for","and","can","could","would","should","please","tell","help","about","really","just","into","does","some","have","want","like","their","there","give","show","more","than","them","these","those","our","his","her","its","was"]);
  const norm=s=>String(s||"").normalize("NFKC").toLowerCase().replace(/[’]/g,"'").replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim();
  const words=s=>new Set(norm(s).split(" ").filter(w=>w.length>2&&!stop.has(w)));
  const state=new Map(),bank=new Map(),history=new Map();
  let pending=null;
- const sensitive=/\b(?:password|access token|api key|secret key|private key|student record|student id|credit card|ssn|social security|home address|bank account|private chat|personal phone|medical record|login credential|authentication|answer key|locked exam|locked test|graded assessment|suicide|self[- ]harm|kill myself|immediate danger|emergency)\b/i;
+ const sensitive=/\b(?:passcode|password|access token|api key|secret key|private key|student record|student id|credit card|ssn|social security|home address|bank account|private chat|personal phone|medical record|login credential|authentication|answer key|locked exam|locked test|graded assessment|suicide|self[- ]harm|kill myself|immediate danger|emergency|overdose|diagnos\w*|prescri\w*|medical advice|legal advice|private archive|crisis|benefits eligibility)\b/i;
  function verify(data,spec){
-  if(!data||data.schema!==spec.schema||!Array.isArray(data.records)||data.records.length!==spec.count)throw Error("bank-schema-or-count");
+  if(!data||data.schema!==spec.schema||!Array.isArray(data.records)||data.records.length!==spec.count||(spec.privacy&&data.privacy!==spec.privacy))throw Error("bank-schema-or-count");
   const ids=new Set(),questions=new Set(),rows=[];
   for(const r of data.records){
    if(!r||r[spec.field]!==spec.approved||typeof r.id!=="string"||!r.id||
       typeof r.question!=="string"||!r.question.trim()||r.question.length>350||ids.has(r.id)||
-      typeof r.topic!=="string"||!r.topic.trim())throw Error("unapproved-or-malformed");
+      typeof r[spec.topicField||"topic"]!=="string"||!r[spec.topicField||"topic"].trim())throw Error("unapproved-or-malformed");
    const n=norm(r.question);
    ids.add(r.id);
-   const answers=Array.isArray(r.responses)?r.responses.map(x=>x?.text).filter(x=>typeof x==="string"&&x.trim()):[r.answer];
+   const answers=Array.isArray(r.responses)?r.responses.map(x=>x?.text).filter(x=>typeof x==="string"&&x.trim()):[r[spec.answerField||"answer"]];
    if(!answers.length||answers.some(a=>typeof a!=="string"||!a.trim()||a.length>2500))throw Error("invalid-answer");
    const alts=[...(Array.isArray(r.alternateQuestions)?r.alternateQuestions:[]),...(Array.isArray(r.aliases)?r.aliases:[])].filter(x=>typeof x==="string"&&x.length<350);
    if(questions.has(n))continue; // Preserve approved source; deduplicate only retrieval index.
    questions.add(n);
-   rows.push(Object.freeze({mentorId:spec.id,id:r.id,topic:r.topic,question:r.question,alts:Object.freeze(alts),
+   rows.push(Object.freeze({mentorId:spec.id,id:r.id,topic:r[spec.topicField||"topic"],question:r.question,alts:Object.freeze(alts),
     keywords:Object.freeze((Array.isArray(r.keywords)?r.keywords:[]).filter(k=>typeof k==="string"&&k.length<100)),
     answer:answers[0],url:spec.url}));
   }
@@ -54,9 +59,9 @@
  }
  function status(){
   const sources=Object.fromEntries(SPECS.map(s=>[s.id,state.get(s.id)||"not-loaded"]));
-  return Object.freeze({version:"1.0.0",sources,
+  return Object.freeze({version:"1.1.0",sources,
    approvedAvailable: [...bank.values()].reduce((n,rows)=>n+rows.length,0),
-   indexedSources:bank.size,expectedTotal:1227,transcriptTransport:false,privateCOREAccess:false});
+   indexedSources:bank.size,expectedTotal:1354,transcriptTransport:false,privateCOREAccess:false});
  }
  function match(query,{mentorId,excludeIds=[]}={}){
   if(!names[mentorId])return null;
@@ -104,6 +109,6 @@
   return found;
  }
  function reset({mentorId,scope="public"}={}){history.delete(mentorId+":"+String(scope).slice(0,50));}
- root.CreativeSparkMentorQA=Object.freeze({version:"1.0.0",init,status,match,answer,reset});
+ root.CreativeSparkMentorQA=Object.freeze({version:"1.1.0",init,status,match,answer,reset});
  init();
 })(window);
