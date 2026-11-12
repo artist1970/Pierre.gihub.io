@@ -26,11 +26,13 @@
    if(!r||r[spec.field]!==spec.approved||typeof r.id!=="string"||!r.id||
       typeof r.question!=="string"||!r.question.trim()||r.question.length>350||ids.has(r.id)||
       typeof r.topic!=="string"||!r.topic.trim())throw Error("unapproved-or-malformed");
-   const n=norm(r.question);if(questions.has(n))throw Error("duplicate-question");
-   ids.add(r.id);questions.add(n);
+   const n=norm(r.question);
+   ids.add(r.id);
    const answers=Array.isArray(r.responses)?r.responses.map(x=>x?.text).filter(x=>typeof x==="string"&&x.trim()):[r.answer];
    if(!answers.length||answers.some(a=>typeof a!=="string"||!a.trim()||a.length>2500))throw Error("invalid-answer");
    const alts=[...(Array.isArray(r.alternateQuestions)?r.alternateQuestions:[]),...(Array.isArray(r.aliases)?r.aliases:[])].filter(x=>typeof x==="string"&&x.length<350);
+   if(questions.has(n))continue; // Preserve approved source; deduplicate only retrieval index.
+   questions.add(n);
    rows.push(Object.freeze({mentorId:spec.id,id:r.id,topic:r.topic,question:r.question,alts:Object.freeze(alts),
     keywords:Object.freeze((Array.isArray(r.keywords)?r.keywords:[]).filter(k=>typeof k==="string"&&k.length<100)),
     answer:answers[0],url:spec.url}));
