@@ -5,10 +5,10 @@
  * Grammar advice is limited original browser-local guidance, not AIPCore v8.2.
  */
 (function(root){"use strict";
- if(root.CreativeSparkMentorLanguage?.version==="1.1.0")return;
+ if(root.CreativeSparkMentorLanguage?.version==="1.2.0")return;
  const PUBLIC_DICTIONARY="https://artist1970.github.io/Pierre.gihub.io/knowledge/public-dictionary.v1.json";
  const SCHEMA="pierre-public-dictionary-v1";
- const allowed=new Set(["pierre","eiren","archaemenes"]);
+ const allowed=new Set(["pierre","eiren","archaemenes","zelle"]);
  const entries=new Map(),states=new Map(),inflight=new Map();
  const norm=x=>String(x??"").normalize("NFKC").trim().toLowerCase();
  const clean=x=>String(x??"").trim();
@@ -69,7 +69,7 @@
   return notes.length?{notes:notes.slice(0,3),source:"public-local-basic-grammar-v1",advisory:true}:null;
  }
  function capabilities(mentorId){
-  return Object.freeze({version:"1.1.0",mentorId,
+  return Object.freeze({version:"1.2.0",mentorId,
    lexicon:states.get(mentorId)||"not-loaded",
    publishedWordCount:states.get(mentorId)==="ready"?entries.size:0,
    grammar:"basic-advisory-local",
@@ -78,7 +78,7 @@
    source:PUBLIC_DICTIONARY});
  }
  root.CreativeSparkMentorLanguage=Object.freeze({
-  version:"1.1.0",init,lookup,grammar,capabilities,
+  version:"1.2.0",init,lookup,grammar,capabilities,
   approvedSource:PUBLIC_DICTIONARY
  });
 })(window);
