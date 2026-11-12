@@ -12,7 +12,7 @@
   {id:"archaemenes",schema:"archaemenes-question-collection-v1",field:"status",approved:"approved",count:140,url:BASE+"Archaemenes.github.io/knowledge/question-records.json"},
   {id:"zelle",schema:"zelle-question-collection-v1",field:"status",approved:"approved",count:500,url:BASE+"Zelle.github.io/knowledge/question-records.json"}
  ]);
- const names={eiren:"Eiren",pierre:"Pierre",archaemenes:"Archaemenes",zelle:"Zelle",hope:"Hope",moirai:"Moirai"};
+ const names={eiren:"Eiren",pierre:"Pierre",archaemenes:"Archaemenes",zelle:"Zelle",hope:"Hope",moirai:"Moirai",aurora:"Aurora"};
  const stop=new Set(["how","what","why","when","where","which","this","that","with","from","your","you","are","the","for","and","can","could","would","should","please","tell","help","about","really","just","into","does","some","have","want","like","their","there","give","show","more","than","them","these","those","our","his","her","its","was"]);
  const norm=s=>String(s||"").normalize("NFKC").toLowerCase().replace(/[’]/g,"'").replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim();
  const words=s=>new Set(norm(s).split(" ").filter(w=>w.length>2&&!stop.has(w)));
