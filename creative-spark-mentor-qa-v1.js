@@ -87,6 +87,7 @@
   }
   if(!best||best.score<78)return null;
   // Avoid confidently returning an answer for an ambiguous, overlapping query.
+  if(second&&second.score===best.score)return null; // Ambiguous cross-mentor answers must not be arbitrarily selected.
   if(second&&best.score<100&&best.score-second.score<7)return null;
   return Object.freeze({kind:"attributed-public-reference",answer:best.row.answer,sourceMentor:best.row.mentorId,
    sourceName:names[best.row.mentorId],topic:best.row.topic,recordId:best.row.id,score:best.score,
