@@ -165,7 +165,7 @@ try{autoNarration=window.localStorage?.getItem(autoNarrationKey)==="on";}catch{}
 function showAutoNarration(){
  if(!autoNarrationButton)return;
  autoNarrationButton.textContent=autoNarration?"Voice On":"Voice Off";
- autoNarrationButton.setAttribute("aria-pressed",String(autoNarration));
+ autoNarrationButton.setAttribute?.("aria-pressed",String(autoNarration));
 }
 const autoVoiceKey="auto";
 const voiceKey=v=>JSON.stringify([v.voiceURI||"",v.name||"",v.lang||"",!!v.localService]);
