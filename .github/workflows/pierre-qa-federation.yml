@@ -1,0 +1,22 @@
+name: Pierre Shared Q&A Federation Regression
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'creative-spark-mentor-qa-v1.js'
+      - 'pierre-conversation-v1.js'
+      - 'tests/mentor-qa-federation-integration.test.mjs'
+      - '.github/workflows/pierre-qa-federation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/mentor-qa-federation-integration.test.mjs tests/pierre-chat-integration.test.mjs
