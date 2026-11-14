@@ -7,7 +7,7 @@
  if(root.CreativeSparkMentorQA?.version==="1.1.0")return;
  const BASE="https://artist1970.github.io/";
  const SPECS=Object.freeze([
-  {id:"eiren",schema:"vnv-mentor-public-qa-v1",field:"reviewStatus",approved:"approved",count:70,url:BASE+"Eiren.github.io/knowledge/public-qa.v1.json"},
+  {id:"eiren",schema:"vnv-mentor-public-qa-v1",field:"reviewStatus",approved:"approved",count:100,url:BASE+"Eiren.github.io/knowledge/public-qa.v1.json"},
   {id:"pierre",schema:"pierre-public-knowledge-v1",field:"status",approved:"approved-public-seed",count:527,url:BASE+"Pierre.gihub.io/knowledge/public-qa.v1.json"},
   {id:"archaemenes",schema:"archaemenes-question-collection-v1",field:"status",approved:"approved",count:140,url:BASE+"Archaemenes.github.io/knowledge/question-records.json"},
   {id:"zelle",schema:"zelle-question-collection-v1",field:"status",approved:"approved",count:500,url:BASE+"Zelle.github.io/knowledge/question-records.json"},
@@ -61,7 +61,7 @@
   const sources=Object.fromEntries(SPECS.map(s=>[s.id,state.get(s.id)||"not-loaded"]));
   return Object.freeze({version:"1.1.0",sources,
    approvedAvailable: [...bank.values()].reduce((n,rows)=>n+rows.length,0),
-   indexedSources:bank.size,expectedTotal:1364,transcriptTransport:false,privateCOREAccess:false});
+   indexedSources:bank.size,expectedTotal:1394,transcriptTransport:false,privateCOREAccess:false});
  }
  function match(query,{mentorId,excludeIds=[]}={}){
   if(!names[mentorId])return null;
