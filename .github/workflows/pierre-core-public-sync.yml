@@ -1,0 +1,35 @@
+name: Pierre CORE Public Identity Sync
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'knowledge/pierre-core-profile.v1.json'
+      - 'pierre-core-public-link-v1.js'
+      - 'index.html'
+      - 'tests/pierre-core-public-sync.test.mjs'
+      - '.github/workflows/pierre-core-public-sync.yml'
+  pull_request:
+    paths:
+      - 'knowledge/pierre-core-profile.v1.json'
+      - 'pierre-core-public-link-v1.js'
+      - 'index.html'
+      - 'tests/pierre-core-public-sync.test.mjs'
+      - '.github/workflows/pierre-core-public-sync.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  role-and-source-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate profile reader syntax
+        run: node --check pierre-core-public-link-v1.js
+      - name: Verify CORE authority and public profile
+        run: node --test tests/pierre-core-public-sync.test.mjs
