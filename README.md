@@ -12,8 +12,14 @@ The repository's literal name is **`Pierre.gihub.io`** (not `Pierre.github.io`).
 ## Behavior and limitations
 The public chatbot uses a small read-only editorial knowledge file and browser-local deterministic routing. It is not a hosted generative AI model and does not store or send messages to a server. Optional reply speech relies on browser support and installed voices. No Code Capsule storage, keys, or private records are loaded.
 
+## Source-pinned PierreCore public identity (2026-11-21)
+
+The front door now reads its same-origin `knowledge/pierre-core-profile.v1.json`, an exact approved projection of `artist1970/CORE/PierreCore/public-identity.v1.json`. `pierre-core-public-link-v1.js` verifies mentor ID, source revision and fixed nonprivileged authority flags before displaying Pierre's profile status. If unavailable or invalid, the visitor chat continues with its existing approved sources. This identity reader has no CORE private-file access, browser persistence or execution powers.
+
+`tests/pierre-core-public-sync.test.mjs` and `.github/workflows/pierre-core-public-sync.yml` guard this contract. The existing public Q&A bank and dictionary were not replaced.
+
 ## Safe Code Capsule sync contract
-`Pierre-language-data.html` is an existing Creative Spark browser-local Mini Cloud workspace. Its localStorage is not shared with this origin. Future import requires explicit user export, schema validation, private-data exclusion, linguistic review, versioned approval, content deduplication and a reversible publication receipt. Do not overwrite its `cloudFS` storage or automatically publish drafts.
+`Pierre-language-data.html` is an existing Creative Spark browser-local Mini Cloud workspace. Its localStorage is not shared with this origin. Creative Spark now provides an explicit versioned **review-only** export of its 100 Pierre Q&A drafts with CORE source provenance, via `pierre-creative-spark-review-export-v1`. This is a draft handoff, **not** a public knowledge merge. Any future publication requires explicit user export, schema validation, private-data exclusion, linguistic review, versioned approval, content deduplication and a reversible publication receipt. Do not overwrite its `cloudFS` storage or automatically publish drafts.
 
 ## Verification needed
 Check GitHub Pages activation and deployed desktop/mobile behavior, keyboard navigation, schema failure fallback, speech availability, RTL display, and cross-origin privacy before calling this a production mentor system.
